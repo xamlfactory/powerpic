@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="PicBro.Shell.Windows.Views.FolderListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmds="clr-namespace:PicBro.Shell.Windows.Common"
+             xmlns:properties="clr-namespace:PicBro.Shell.Windows.Properties"
+             mc:Ignorable="d"
+             AllowDrop="True"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             Background="Transparent">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Drop">
+            <cmds:EventCommand Command="{Binding DropCommand}"
+                               CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Delete"
+                    Command="{Binding DeleteCommand}" />
+    </UserControl.InputBindings>
+    <Grid>
+        <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemsSource="{Binding Folders}"
+                 Margin="15 20"
+                 x:Name="FolderListBox"
+                 BorderThickness="0 0 0 0"
+                 BorderBrush="DarkGray"
+                 Background="Transparent"
+                 SelectedItem="{Binding SelectedFolder, Mode=TwoWay}">
+            <ListBox.InputBindings>
+                <KeyBinding Gesture="Shift+Up"
+                            Command="{Binding MoveFolderUpCommand}"
+                            CommandParameter="{Binding ElementName=FolderListBox, Path=SelectedItem}" />
+                <KeyBinding Gesture="Shift+Down"
+                            Command="{Binding MoveFolderDownCommand}"
+                            CommandParameter="{Binding ElementName=FolderListBox,Path=SelectedItem}" />
+            </ListBox.InputBindings>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Tag="{Binding DataContext, ElementName=FolderListBox}"
+                          AllowDrop="True"
+                          x:Name="FolderGrid"
+                          ContextMenu="{Binding DataContext.ContextMenuItems, ElementName=FolderListBox}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseUp">
+                                <cmds:EventCommand Command="{Binding Path=Tag.FolderSelectedCommand,ElementName=FolderGrid}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Drop">
+                                <cmds:EventCommand Command="{Binding Path=Tag.DropFavoriteCommand,ElementName=FolderGrid}"
+                                                   CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="PreviewDrop">
+                                <cmds:EventCommand Command="{Binding Path=Tag.PreviewDropFavoriteCommand,ElementName=FolderGrid}"
+                                                   CommandParameter="{Binding ElementName=FolderGrid, Path=DataContext}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="ContextMenuOpening">
+                                <cmds:EventCommand Command="{Binding Path=Tag.ContextMenuOpenCommand,ElementName=FolderGrid}"
+                                                   CommandParameter="{Binding}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="26" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Assets/Folder-Normal.png"
+                               x:Name="img"
+                               Margin="5"
+                               Stretch="Uniform"
+                               VerticalAlignment="Center"
+                               Width="16" />
+                        <Path Data="M1540.22,2082.07L1546.95,2102.78 1568.73,2102.78 1551.11,2115.58 1557.84,2136.29 1540.22,2123.49 1522.6,2136.29 1529.33,2115.58 1511.71,2102.78 1533.49,2102.78 1540.22,2082.07z"
+                              Height="20"
+                              Width="20"
+                              Opacity="0"
+                              x:Name="path"
+                              Stretch="Uniform"
+                              Fill="#F4981F"
+                              Margin="3" />
+                        <TextBlock Text="{Binding Name}"
+                                   Grid.Column="1"
+                                   TextWrapping="NoWrap"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="5"
+                                   ToolTip="{Binding Name}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding
+                            RelativeSource={RelativeSource
+                                Mode=FindAncestor,
+                                AncestorType={x:Type ListBoxItem}},
+                                Path=IsSelected}"
+                                     Value="True">
+                            <Setter Property="Source"
+                                    TargetName="img"
+                                    Value="/Assets/Folder.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ID}"
+                                     Value="-1">
+                            <Setter Property="Opacity"
+                                    Value="1"
+                                    TargetName="path" />
+                            <Setter Property="Opacity"
+                                    Value="0"
+                                    TargetName="img" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

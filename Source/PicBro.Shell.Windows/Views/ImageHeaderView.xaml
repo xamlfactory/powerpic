@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="PicBro.Shell.Windows.Views.ImageHeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:resources="clr-namespace:PicBro.Globalization.Windows;assembly=PicBro.Globalization.Windows"
+             xmlns:converter="clr-namespace:PicBro.Shell.Windows.Converter"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:properties="clr-namespace:PicBro.Shell.Windows.Properties"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <converter:SortBySelectonConverter x:Key="SortBySelectionConverter" />
+        <RadioButton x:Key="RadioButtonResource"
+                     x:Shared="False"
+                     VerticalAlignment="Center"
+                     Margin="3"
+                     IsHitTestVisible="False"
+                     GroupName="sort"
+                     Tag="{Binding SortBy}">
+            <RadioButton.Style>
+                <Style TargetType="RadioButton"
+                       BasedOn="{StaticResource {x:Type RadioButton}}">
+                    <Setter Property="IsChecked">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource SortBySelectionConverter}">
+                                <Binding Path="Header"
+                                         RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType=MenuItem}" />
+                                <Binding Path="Tag"
+                                         RelativeSource="{RelativeSource Self}" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </RadioButton.Style>
+        </RadioButton>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition  Width="Auto" />
+            <ColumnDefinition  Width="Auto" />
+            <ColumnDefinition  Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Menu FontSize="14"
+              Grid.ColumnSpan="2"
+              Background="Transparent">
+            <MenuItem Header="FILE">
+                <MenuItem Header="_Add directory"
+                          Command="{Binding AddFolderCommand}" />
+
+                <Separator />
+                <MenuItem Header="E_xit"
+                          Command="{Binding ExitCommand}" />
+            </MenuItem>
+
+            <MenuItem Header="HELP">
+                <MenuItem Header="About"
+                          Click="OnAbout" />
+                <MenuItem Header="Tutorial"
+                          Command="{Binding LaunchTutorialCommand}" />
+            </MenuItem>
+        </Menu>
+        <Button Grid.Row="1"
+                Content="BACK"
+                Margin="5"
+                Command="{Binding BackCommand}"
+                FontSize="12"
+                BorderThickness="1"
+                Style="{DynamicResource MetroFlatButton}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center" />
+        <TextBox Grid.Row="1"
+                 Grid.Column="1"
+                 IsEnabled="{Binding EnableSearchSort}"
+                 VerticalAlignment="Center"
+                 FontSize="16"
+                 Height="30"
+                 Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Controls:TextboxHelper.Watermark="Search"
+                 Controls:TextboxHelper.ClearTextButton="True"
+                 Margin="5">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter"
+                            Command="{Binding SearchCommand}" />
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <Slider Maximum="{Binding MaximumSliderValue}"
+                Minimum="{Binding MinimumSliderValue}"
+                Width="80"
+                VerticalAlignment="Center"
+                Value="{Binding ThumbSize,Mode=TwoWay}"
+                Interval="25"
+                SmallChange="25"
+                LargeChange="25"
+                IsSnapToTickEnabled="True"
+                TickFrequency="{Binding SliderIncrement}"
+                Grid.Row="1"
+                Grid.Column="2"
+                Visibility="{Binding EnableSearchSort,Converter={StaticResource BoolToVisibilityConverter}}"
+                Margin="10,0,10,0">
+        </Slider>
+
+        <Button Grid.Row="1"
+                Grid.Column="3"
+                IsEnabled="{Binding EnableSearchSort}"
+                VerticalAlignment="Center"
+                Background="{Binding Source={x:Static properties:Settings.Default}, Path=MenuBackground}"
+                Command="{Binding SearchSettingsCommand}">
+            <Path Data="M31.679651,15.723C22.841078,15.723 15.677,22.887022 15.677,31.724249 15.677,40.562878 22.841078,47.727002 31.679651,47.727002 40.518124,47.727002 47.682003,40.562878 47.682003,31.724249 47.682003,22.887022 40.518124,15.723 31.679651,15.723z M25.174641,0L30.947304,8.1649995 30.977009,8.163671C31.891628,8.1361193,32.811726,8.1617675,33.732849,8.2423577L34.116646,8.2807278 40.096367,0.5289996 49.181995,4.5158782 47.510448,14.236901 47.626137,14.339919C48.479649,15.11912,49.268909,15.955267,49.990528,16.839653L50.234638,17.14785 60.403648,15.836 64.007996,25.079203 55.322643,31.217757 55.324234,31.258986C55.34618,32.174153,55.314838,33.094563,55.22847,34.015755L55.226952,34.030385 63.345997,40.294331 59.359104,49.380002 49.249798,47.645153 49.143776,47.764214C48.695721,48.255009,48.228832,48.72456,47.744774,49.172226L47.324875,49.549786 48.723995,60.394425 39.48156,64 33.403603,55.403061 33.023663,55.43042C32.149929,55.481137,31.270197,55.483376,30.38839,55.435608L29.679308,55.383191 23.130268,63.875 14.041999,59.886834 15.844025,49.393521 15.71986,49.282948C15.207753,48.815411,14.718776,48.32737,14.253661,47.820706L13.803129,47.315312 3.612031,48.630002 0.0080004195,39.385499 8.0905037,33.673707 8.0481892,33.048829C7.9875851,31.908507,8.0095654,30.758269,8.1175261,29.606822L8.1191311,29.59272 0,23.328246 3.9867127,14.242 14.093521,15.978928 14.104487,15.966273C15.033746,14.935561,16.045525,13.997155,17.124784,13.156928L17.159048,13.131042 15.929999,3.6040602z"
+                  Height="16"
+                  Width="16"
+                  Stretch="Uniform"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Fill="Gray" />
+        </Button>
+        <Menu Grid.Row="1"
+              IsEnabled="{Binding EnableSearchSort}"
+              Background="Transparent"
+              Grid.Column="4">
+            <MenuItem Margin="5"
+                      Background="{Binding Source={x:Static properties:Settings.Default}, Path=MenuBackground}"
+                      Padding="5 10">
+                <MenuItem.Icon>
+                    <Path Data="M3.7426052,26.904L18.757133,26.904 18.757133,29.888415 7.3493233,45.104584 8.6943188,45.104584C10.549742,45.104584 11.935006,44.932781 12.852983,44.586281 13.771059,44.242581 14.617338,43.633179 15.395918,42.755573 16.173198,41.88057 16.778083,40.805065 17.212872,39.529057L20.041,40.487461 17.210372,48.477001 0.7426796,48.477001 0.7426796,45.476986 12.195499,30.305016 10.400045,30.305016C9.1850872,30.305016 8.2072716,30.450716 7.4651604,30.737417 6.7242184,31.026419 6.0797062,31.453421 5.5343094,32.021225 4.9873238,32.586228 4.204874,33.776432 3.1852398,35.58894L0.4640007,34.383133z M10.53274,6.6691019L8.3373299,12.593632 12.621266,12.593632z M8.9844284,0.97900033L13.830882,0.97900033 20.304368,17.635367C20.655872,18.520773 20.965776,19.067578 21.23928,19.273277 21.512583,19.47908 22.01529,19.578081 22.747,19.567579L22.747,22.552 12.541765,22.552 12.541765,19.567579 13.160374,19.551981C13.726781,19.551981 14.125186,19.476481 14.351689,19.328079 14.578292,19.179577 14.692894,18.994776 14.692894,18.778574 14.692894,18.593674 14.592592,18.210772 14.39859,17.635367L13.754081,15.671753 7.1953449,15.671753 6.3868046,17.851469C6.2214527,18.315071 6.1394215,18.619774 6.1394215,18.762974 6.1394215,18.929575 6.1993008,19.078077 6.3177128,19.210777 6.4348946,19.346279 6.6289368,19.445179 6.8971806,19.507679 7.0729027,19.54678 7.5573502,19.567579 8.3516102,19.567579L8.3516102,22.552 0,22.552 0,19.567579C0.53510284,19.567579 0.92579269,19.520781 1.1744556,19.429579 1.4205494,19.335779 1.6263008,19.197878 1.7864628,19.010376 1.9452763,18.825476 2.122467,18.479073 2.3190002,17.97387z M38.356057,0L43.574738,0 43.574738,39.224159 50.647713,32.15123 54.342999,35.841347 40.978449,49.205998 40.960249,49.185097 40.939447,49.205998 27.579999,35.841347 31.267486,32.15123 38.356057,39.237259z"
+                          Width="16"
+                          Height="16"
+                          Stretch="Uniform"
+                          Fill="Gray"
+                          x:Name="path1" />
+                </MenuItem.Icon>
+                <MenuItem.Header>
+                    <Path Data="M454.165,177.507L422.165,212.46 390.165,177.507 454.165,177.507z"
+                          Width="10"
+                          Height="10"
+                          Margin="0"
+                          Stretch="Uniform"
+                          Fill="Gray"
+                          x:Name="path2" />
+                </MenuItem.Header>
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem"
+                           BasedOn="{StaticResource {x:Type MenuItem}}">
+                        <Setter Property="Icon"
+                                Value="{StaticResource RadioButtonResource}" />
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+                <MenuItem x:Name="NameMenuItem"
+                          Header="Name"
+                          VerticalAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          Command="{Binding SortCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                </MenuItem>
+                <MenuItem Name="DateMenuItem"
+                          Header="Date Modified"
+                          VerticalContentAlignment="Center"
+                          Command="{Binding SortCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                </MenuItem>
+                <MenuItem Name="SizeMenuItem"
+                          Header="Size"
+                          Command="{Binding SortCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                          VerticalContentAlignment="Center">
+                </MenuItem>
+                <MenuItem Name="TypeMenuItem"
+                          Header="Type"
+                          Command="{Binding SortCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                          VerticalContentAlignment="Center">
+                </MenuItem>
+                <MenuItem Name="PopularityMenuItem"
+                          Header="Popularity"
+                          Command="{Binding SortCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                          VerticalContentAlignment="Center">
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</UserControl>

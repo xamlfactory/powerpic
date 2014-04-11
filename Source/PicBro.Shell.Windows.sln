@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicBro.DAL.Windows", "PicBro.DAL.Windows\PicBro.DAL.Windows.csproj", "{F148B214-9040-4393-9C15-59BFB1321B3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicBro.DataModel.Windows", "PicBro.DataModel.Windows\PicBro.DataModel.Windows.csproj", "{48990325-BBF4-429A-A8E4-688639075288}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicBro.Foundation.Windows", "PicBro.Foundation.Windows\PicBro.Foundation.Windows.csproj", "{247DBE87-FE14-46A3-B081-4F6FBC237731}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicBro.Globalization.Windows", "PicBro.Globalization.Windows\PicBro.Globalization.Windows.csproj", "{A0B6AFBA-8948-4194-9A30-3C917F3A18EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicBro.Shell.Windows", "PicBro.Shell.Windows\PicBro.Shell.Windows.csproj", "{D116AF61-7AEA-472D-8746-2EBE3321988C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{3ADF5EE7-0CDB-471C-A3EA-3C5FFA3747CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicBro.UnitTests", "UnitTests\PicBro.UnitTests\PicBro.UnitTests.csproj", "{3C48FBE3-7F3A-4731-B62C-1928372E1AF9}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://xamlfactory.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PicBro.DAL.Windows\\PicBro.DAL.Windows.csproj
+		SccProjectName1 = PicBro.DAL.Windows
+		SccLocalPath1 = PicBro.DAL.Windows
+		SccProjectUniqueName2 = PicBro.DataModel.Windows\\PicBro.DataModel.Windows.csproj
+		SccProjectName2 = PicBro.DataModel.Windows
+		SccLocalPath2 = PicBro.DataModel.Windows
+		SccProjectUniqueName3 = PicBro.Foundation.Windows\\PicBro.Foundation.Windows.csproj
+		SccProjectName3 = PicBro.Foundation.Windows
+		SccLocalPath3 = PicBro.Foundation.Windows
+		SccProjectUniqueName4 = PicBro.Globalization.Windows\\PicBro.Globalization.Windows.csproj
+		SccProjectName4 = PicBro.Globalization.Windows
+		SccLocalPath4 = PicBro.Globalization.Windows
+		SccProjectUniqueName5 = PicBro.Shell.Windows\\PicBro.Shell.Windows.csproj
+		SccProjectName5 = PicBro.Shell.Windows
+		SccLocalPath5 = PicBro.Shell.Windows
+		SccProjectUniqueName6 = UnitTests\\PicBro.UnitTests\\PicBro.UnitTests.csproj
+		SccProjectTopLevelParentUniqueName6 = PicBro.Shell.Windows.sln
+		SccProjectName6 = UnitTests/PicBro.UnitTests
+		SccLocalPath6 = UnitTests\\PicBro.UnitTests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F148B214-9040-4393-9C15-59BFB1321B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F148B214-9040-4393-9C15-59BFB1321B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F148B214-9040-4393-9C15-59BFB1321B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F148B214-9040-4393-9C15-59BFB1321B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48990325-BBF4-429A-A8E4-688639075288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48990325-BBF4-429A-A8E4-688639075288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48990325-BBF4-429A-A8E4-688639075288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48990325-BBF4-429A-A8E4-688639075288}.Release|Any CPU.Build.0 = Release|Any CPU
+		{247DBE87-FE14-46A3-B081-4F6FBC237731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{247DBE87-FE14-46A3-B081-4F6FBC237731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{247DBE87-FE14-46A3-B081-4F6FBC237731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{247DBE87-FE14-46A3-B081-4F6FBC237731}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B6AFBA-8948-4194-9A30-3C917F3A18EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B6AFBA-8948-4194-9A30-3C917F3A18EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B6AFBA-8948-4194-9A30-3C917F3A18EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B6AFBA-8948-4194-9A30-3C917F3A18EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D116AF61-7AEA-472D-8746-2EBE3321988C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D116AF61-7AEA-472D-8746-2EBE3321988C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D116AF61-7AEA-472D-8746-2EBE3321988C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D116AF61-7AEA-472D-8746-2EBE3321988C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C48FBE3-7F3A-4731-B62C-1928372E1AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C48FBE3-7F3A-4731-B62C-1928372E1AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C48FBE3-7F3A-4731-B62C-1928372E1AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C48FBE3-7F3A-4731-B62C-1928372E1AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C48FBE3-7F3A-4731-B62C-1928372E1AF9} = {3ADF5EE7-0CDB-471C-A3EA-3C5FFA3747CE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal

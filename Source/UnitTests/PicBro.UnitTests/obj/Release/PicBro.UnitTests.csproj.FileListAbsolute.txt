@@ -1,0 +1,5 @@
+E:\Workspace\PowerPic\Main\Source\UnitTests\PicBro.UnitTests\bin\Release\PicBro.UnitTests.dll
+E:\Workspace\PowerPic\Main\Source\UnitTests\PicBro.UnitTests\bin\Release\PicBro.UnitTests.pdb
+E:\Workspace\PowerPic\Main\Source\UnitTests\PicBro.UnitTests\obj\Release\PicBro.UnitTests.csprojResolveAssemblyReference.cache
+E:\Workspace\PowerPic\Main\Source\UnitTests\PicBro.UnitTests\obj\Release\PicBro.UnitTests.dll
+E:\Workspace\PowerPic\Main\Source\UnitTests\PicBro.UnitTests\obj\Release\PicBro.UnitTests.pdb

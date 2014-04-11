@@ -1,0 +1,278 @@
+﻿<UserControl x:Class="PicBro.Shell.Windows.Views.ImageListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             AllowDrop="True"
+             xmlns:foundation="clr-namespace:PicBro.Foundation.Windows;assembly=PicBro.Foundation.Windows"
+             xmlns:dragdroputils="clr-namespace:PicBro.Foundation.Windows.Utils.DragDropUtils;assembly=PicBro.Foundation.Windows"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:behaviors="clr-namespace:PicBro.Shell.Windows.Behaviors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:cmds="clr-namespace:PicBro.Shell.Windows.Common"
+             d:DesignHeight="300"
+             IsManipulationEnabled="True"
+             Focusable="True"
+             d:DesignWidth="300">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Drop">
+            <cmds:EventCommand Command="{Binding DropCommand}"
+                               CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <cmds:EventCommand Command="{Binding LoadedCommand}"
+                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Margin="0 20 8 20">
+        <Grid.Resources>
+            <DataTemplate x:Key="ImageModelDragTemplate">
+                <Grid Background="Transparent"
+                      Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect ShadowDepth="0"
+                                              Opacity="0.7"
+                                              BlurRadius="2" />
+                        </Grid.Effect>
+                        <ItemsControl ItemsSource="{Binding}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ThumbDataSmall}"
+                                           Width="55"
+                                           Height="55"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Stretch="UniformToFill" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+        <ListBox ItemsSource="{Binding Images}"
+                 x:Name="list"
+                 Background="Transparent"
+                 dragdroputils:DragDropHelper.IsDragSource="True"
+                 dragdroputils:DragDropHelper.DragDropTemplate="{StaticResource ImageModelDragTemplate}"
+                 SelectionMode="Extended"
+                 SelectedIndex="{Binding SelectedIndex,Mode=TwoWay}"
+                 SelectedItem="{Binding SelectedImage, Mode=TwoWay}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OpenCommand}"
+                                           CommandParameter="{Binding ElementName=list, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <i:Interaction.Behaviors>
+                <behaviors:ListBoxSelectAllBehavior IsSelectAll="{Binding ElementName=list,Path=DataContext.IsSelectAll,Mode=TwoWay}" />
+                <behaviors:FocusBehavior IsFocus="{Binding ElementName=list,Path=DataContext.IsFocusList,Mode=TwoWay}" />
+            </i:Interaction.Behaviors>
+            <ListBox.InputBindings>
+                <KeyBinding Key="Enter"
+                            Modifiers="Control"
+                            Command="{Binding AddToFlimStripCommand}"
+                            CommandParameter="{Binding Path=SelectedItems,ElementName=list}" />
+                <KeyBinding Key="Enter"
+                            Command="{Binding OpenCommand}"
+                            CommandParameter="{Binding Path=SelectedItem,ElementName=list}" />
+                <KeyBinding Key="Space"
+                            Command="{Binding OpenCommand}"
+                            CommandParameter="{Binding Path=SelectedItem,ElementName=list}" />
+            </ListBox.InputBindings>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem"
+                       BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Grid PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
+                                      PreviewMouseLeftButtonUp="Grid_PreviewMouseLeftButtonUp">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center" />
+                                    <Rectangle Opacity="0"
+                                               x:Name="rect">
+                                        <Rectangle.Fill>
+                                            <RadialGradientBrush>
+                                                <GradientStop Color="#38000000"
+                                                              Offset="1" />
+                                                <GradientStop Color="#42FFFFFF" />
+                                            </RadialGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected"
+                                             Value="True">
+                                        <Setter Property="Effect"
+                                                Value="{x:Null}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <foundation:VirtualizingWrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="Transparent"
+                          Margin="10"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          RenderOptions.BitmapScalingMode="HighQuality">
+                        <Grid>
+                            <Border BorderThickness="4"
+                                    BorderBrush="Transparent"
+                                    Padding="0"
+                                    x:Name="border"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                <Grid>
+                                    <Image Source="{Binding ThumbDataSmall}"
+                                           VerticalAlignment="Center"
+                                           x:Name="SmallThumb"
+                                           HorizontalAlignment="Center"
+                                           Stretch="None">
+                                        <Image.Effect>
+                                            <DropShadowEffect ShadowDepth="0"
+                                                              Opacity="1"
+                                                              BlurRadius="5" />
+                                        </Image.Effect>
+                                    </Image>
+
+                                    <Image Source="{Binding ThumbDataMedium}"
+                                           VerticalAlignment="Center"
+                                           x:Name="MediumThumb"
+                                           HorizontalAlignment="Center"
+                                           Visibility="Collapsed"
+                                           Stretch="None">
+                                        <Image.Effect>
+                                            <DropShadowEffect ShadowDepth="0"
+                                                              Opacity="1"
+                                                              BlurRadius="5" />
+                                        </Image.Effect>
+                                    </Image>
+
+                                    <Image Source="{Binding ThumbDataLarge}"
+                                           VerticalAlignment="Center"
+                                           Visibility="Collapsed"
+                                           HorizontalAlignment="Center"
+                                           x:Name="LargeThumb"
+                                           Stretch="None">
+                                        <Image.Effect>
+                                            <DropShadowEffect ShadowDepth="0"
+                                                              Opacity="1"
+                                                              BlurRadius="5" />
+                                        </Image.Effect>
+                                    </Image>
+
+                                    <Image Source="{Binding ThumbDataExtraLarge}"
+                                           VerticalAlignment="Center"
+                                           Visibility="Collapsed"
+                                           HorizontalAlignment="Center"
+                                           x:Name="ExtraLargeThumb"
+                                           Stretch="None">
+                                        <Image.Effect>
+                                            <DropShadowEffect ShadowDepth="0"
+                                                              Opacity="1"
+                                                              BlurRadius="5" />
+                                        </Image.Effect>
+                                    </Image>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}"
+                                     Value="True">
+                            <Setter Property="BorderBrush"
+                                    Value="#3DADDD"
+                                    TargetName="border" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ImageThumbSize}"
+                                     Value="Small">
+                            <Setter TargetName="SmallThumb"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="MediumThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="LargeThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="ExtraLargeThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding ImageThumbSize}"
+                                     Value="Medium">
+                            <Setter TargetName="SmallThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="MediumThumb"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="LargeThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="ExtraLargeThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding ImageThumbSize}"
+                                     Value="Large">
+                            <Setter TargetName="SmallThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="MediumThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="LargeThumb"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="ExtraLargeThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding ImageThumbSize}"
+                                     Value="ExtraLarge">
+                            <Setter TargetName="SmallThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="MediumThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="LargeThumb"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="ExtraLargeThumb"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

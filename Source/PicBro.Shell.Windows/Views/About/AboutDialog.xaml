@@ -1,0 +1,56 @@
+﻿<Controls:MetroWindow x:Class="PicBro.Shell.Windows.Views.About.AboutDialog"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      WindowStartupLocation="CenterOwner"
+                      ResizeMode="NoResize"
+                      SizeToContent="Height"
+                      ShowInTaskbar="False"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      Title="About"
+                      Width="380">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.1*" />
+        </Grid.RowDefinitions>
+        <Image Grid.RowSpan="2"
+               VerticalAlignment="Top"
+               Source="/Assets/Splash.jpg">
+        </Image>
+        <Grid>
+            <TextBlock Text="Version 1.0.0.0"
+                       Foreground="#383938"
+                       FontSize="13"
+                       Margin="15 75 0 0" />
+        </Grid>
+        <Grid Grid.Row="1"
+              Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Margin="10 10 10 0"
+                       VerticalAlignment="Top"
+                       Text="Thank you for using our product. We hope you find this software as useful as we do. Are there any features missing? Is there anything else you would like to see?  "
+                       TextWrapping="Wrap" />
+            <StackPanel Margin="10"
+                        Grid.Row="1">
+                <TextBlock Text="Please let us know at:" />
+                <Frame>
+                    <Frame.Content>
+                        <TextBlock><Hyperlink NavigateUri="mailto://feedback@symposity.com">feedback@symposity.com</Hyperlink></TextBlock>
+                    </Frame.Content>
+                </Frame>
+            </StackPanel>
+            <TextBlock Grid.Row="2"
+                       VerticalAlignment="Center"
+                       Text="Copyright © 2013,2014 Symposity. All Rights reserved."
+                       Margin="10" />
+        </Grid>
+        <Rectangle Grid.RowSpan="3"
+                   VerticalAlignment="Top"
+                   Height="2"
+                   Fill="{DynamicResource AccentColorBrush}" />
+    </Grid>
+</Controls:MetroWindow>

@@ -1,0 +1,6 @@
+E:\Workspace\PowerPic\Main\Source\PicBro.DataModel.Windows\bin\Debug\PicBro.DataModel.Windows.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.DataModel.Windows\bin\Debug\PicBro.DataModel.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.DataModel.Windows.dll
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.DataModel.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\PicBro.DataModel.Windows\obj\Debug\PicBro.DataModel.Windows.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.DataModel.Windows\obj\Debug\PicBro.DataModel.Windows.pdb

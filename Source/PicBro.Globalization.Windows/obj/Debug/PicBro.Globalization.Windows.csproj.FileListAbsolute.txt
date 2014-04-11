@@ -1,0 +1,8 @@
+E:\Workspace\PowerPic\Main\Source\PicBro.Globalization.Windows\bin\Debug\PicBro.Globalization.Windows.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.Globalization.Windows\bin\Debug\PicBro.Globalization.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.Globalization.Windows.dll
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.Globalization.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\PicBro.Globalization.Windows\obj\Debug\PicBro.Globalization.Windows.StringResources.resources
+E:\Workspace\PowerPic\Main\Source\PicBro.Globalization.Windows\obj\Debug\PicBro.Globalization.Windows.csproj.GenerateResource.Cache
+E:\Workspace\PowerPic\Main\Source\PicBro.Globalization.Windows\obj\Debug\PicBro.Globalization.Windows.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.Globalization.Windows\obj\Debug\PicBro.Globalization.Windows.pdb

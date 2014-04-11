@@ -1,0 +1,7 @@
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.DataModel.Windows.dll
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.DataModel.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\PicBro.DataModel.Windows\obj\Release\PicBro.DataModel.Windows.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.DataModel.Windows\obj\Release\PicBro.DataModel.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\Build\PicBro.DataModel.Windows.dll
+E:\Workspace\PowerPic\Main\Source\Build\PicBro.DataModel.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\PicBro.DataModel.Windows\obj\Release\PicBro.DataModel.Windows.csprojResolveAssemblyReference.cache

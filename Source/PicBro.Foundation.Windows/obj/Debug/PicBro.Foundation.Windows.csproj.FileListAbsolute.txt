@@ -1,0 +1,16 @@
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\bin\Debug\PicBro.Foundation.Windows.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\bin\Debug\PicBro.Foundation.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\bin\Debug\Microsoft.Practices.Prism.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\bin\Debug\Microsoft.Practices.Prism.xml
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.Foundation.Windows.dll
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.Foundation.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\obj\Debug\Components\DialogWindow.baml
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\obj\Debug\Components\DialogWindow.g.cs
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\obj\Debug\PicBro.Foundation.Windows_MarkupCompile.cache
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\obj\Debug\PicBro.Foundation.Windows.g.resources
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\obj\Debug\PicBro.Foundation.Windows.Properties.Resources.resources
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\obj\Debug\PicBro.Foundation.Windows.csproj.GenerateResource.Cache
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\obj\Debug\PicBro.Foundation.Windows.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.Foundation.Windows\obj\Debug\PicBro.Foundation.Windows.pdb

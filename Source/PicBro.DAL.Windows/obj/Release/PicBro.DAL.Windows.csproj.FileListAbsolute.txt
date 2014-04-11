@@ -1,0 +1,13 @@
+E:\Workspace\PowerPic\Main\Source\Binaries\x64\SQLite.Interop.dll
+E:\Workspace\PowerPic\Main\Source\Binaries\x86\SQLite.Interop.dll
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.DAL.Windows.dll.config
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.DAL.Windows.dll
+E:\Workspace\PowerPic\Main\Source\Binaries\PicBro.DAL.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\PicBro.DAL.Windows\obj\Release\PicBro.DAL.Windows.csprojResolveAssemblyReference.cache
+E:\Workspace\PowerPic\Main\Source\PicBro.DAL.Windows\obj\Release\PicBro.DAL.Windows.dll
+E:\Workspace\PowerPic\Main\Source\PicBro.DAL.Windows\obj\Release\PicBro.DAL.Windows.pdb
+E:\Workspace\PowerPic\Main\Source\Build\x64\SQLite.Interop.dll
+E:\Workspace\PowerPic\Main\Source\Build\x86\SQLite.Interop.dll
+E:\Workspace\PowerPic\Main\Source\Build\PicBro.DAL.Windows.dll.config
+E:\Workspace\PowerPic\Main\Source\Build\PicBro.DAL.Windows.dll
+E:\Workspace\PowerPic\Main\Source\Build\PicBro.DAL.Windows.pdb

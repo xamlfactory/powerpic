@@ -1,0 +1,65 @@
+﻿<Window x:Class="PicBro.Shell.Windows.Views.AppSplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AppSplashScreen"
+        Height="300"
+        Width="450"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1"
+                      CornerRadius="0" />
+    </WindowChrome.WindowChrome>
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+    
+        <Image Source="/Assets/Splash.jpg"
+               Grid.RowSpan="3"
+               Stretch="UniformToFill" />
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Margin="10 10 10 0"
+                       VerticalAlignment="Top"
+                       Text="Thank you for using our product. We hope you find this software as useful as we do. Are there any features missing? Is there anything else you would like to see?  "
+                       TextWrapping="Wrap" />
+            <StackPanel Margin="10"
+                        Grid.Row="1">
+                <TextBlock Text="Please let us know at:" />
+                <Frame>
+                    <Frame.Content>
+                        <TextBlock><Hyperlink NavigateUri="mailto://feedback@symposity.com">feedback@symposity.com</Hyperlink></TextBlock>
+                    </Frame.Content>
+                </Frame>
+            </StackPanel>
+            <TextBlock Grid.Row="2"
+                       VerticalAlignment="Center"
+                       Text="Copyright © 2013,2014 Symposity. All Rights reserved."
+                       Margin="10" />
+        </Grid>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock VerticalAlignment="Bottom"
+                       Margin="10 0 0 0">
+            <Run Text="{Binding Message, FallbackValue=Test}" />
+            <Run Text="{Binding Progress, FallbackValue=0}" />
+            <Run Text="%" />
+            </TextBlock>
+            <ProgressBar Grid.Row="2"
+                         Value="{Binding Progress, FallbackValue=50}"
+                         Height="2"
+                         Margin="0 5 0 20" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="PicBro.Shell.Windows.Views.ImageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d"
+             AllowDrop="True"
+             Background="Transparent"
+             xmlns:foundation="clr-namespace:PicBro.Foundation.Windows.Components;assembly=PicBro.Foundation.Windows"
+             xmlns:dragdroputils="clr-namespace:PicBro.Foundation.Windows.Utils.DragDropUtils;assembly=PicBro.Foundation.Windows"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmds="clr-namespace:PicBro.Shell.Windows.Common"
+             x:Name="ImageFullViewUC"
+             Focusable="True"
+             d:DesignHeight="300"
+             KeyboardNavigation.DirectionalNavigation="Cycle"
+             d:DesignWidth="300">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Drop">
+            <cmds:EventCommand Command="{Binding DropCommand}"
+                               CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Right"
+                    Command="{Binding NextImageCommand}" />
+        <KeyBinding Key="Left"
+                    Command="{Binding PreviousImageCommand}" />
+        <KeyBinding Key="Enter"
+                    Modifiers="Control"
+                    Command="{Binding AddToFlimStripCommand}" />
+    </UserControl.InputBindings>
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Key="ImageModelDragTemplate">
+                <Grid Background="Transparent"
+                      Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect ShadowDepth="0"
+                                              Opacity="0.7"
+                                              BlurRadius="2" />
+                        </Grid.Effect>
+
+                        <Image Source="{Binding ThumbDataSmall}"
+                               Width="55"
+                               Height="55"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Stretch="UniformToFill" />
+
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid>
+
+            <foundation:ZoomContainer IsManipulationEnabled="True">
+                <Border  dragdroputils:DragDropHelper.IsDragSource="True"
+                         Grid.Row="1"
+                         dragdroputils:DragDropHelper.IsDragSourceItemsControl="False"
+                         dragdroputils:DragDropHelper.DragSourceDataContext="{Binding Path=ImageModel,Mode=TwoWay}"
+                         dragdroputils:DragDropHelper.DefaultDragDropEffect="Copy"
+                         Margin="20"
+                         dragdroputils:DragDropHelper.DragDropTemplate="{StaticResource ImageModelDragTemplate}">
+                    <Image Source="{Binding Image}"
+                           Stretch="Uniform" />
+                </Border>
+            </foundation:ZoomContainer>
+        </Grid>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    HorizontalAlignment="Center">
+            <Button Content="ß"
+                    Margin="5,0,10,0"
+                    Focusable="True"
+                    Width="35"
+                    Height="35"
+                    FontSize="15"
+                    x:Name="PreviousImageButton"
+                    FontFamily="Wingdings"
+                    Style="{DynamicResource MetroCircleButtonStyle}"
+                    Padding="0"
+                    Command="{Binding PreviousImageCommand}"
+                    HorizontalAlignment="Left">
+                <Button.InputBindings>
+                    <KeyBinding Key="Enter"
+                                Modifiers="Control"
+                                Command="{Binding AddToFlimStripCommand}" />
+                </Button.InputBindings>
+
+            </Button>
+            <Button Content="à"
+                    Padding="0"
+                    FontSize="15"
+                    x:Name="NextImageButton"
+                    FontFamily="Wingdings"
+                    Style="{DynamicResource MetroCircleButtonStyle}"
+                    Margin="10,0,5,0"
+                    Command="{Binding NextImageCommand}"
+                    HorizontalAlignment="Right"
+                    Width="35"
+                    Height="35">
+                <Button.InputBindings>
+                    <KeyBinding Key="Enter"
+                                Modifiers="Control"
+                                Command="{Binding AddToFlimStripCommand}" />
+                </Button.InputBindings>
+
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

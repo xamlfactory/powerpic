@@ -1,0 +1,274 @@
+﻿<UserControl x:Class="PicBro.Shell.Windows.Views.FooterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dragdroputils="clr-namespace:PicBro.Foundation.Windows.Utils.DragDropUtils;assembly=PicBro.Foundation.Windows"
+             xmlns:properties="clr-namespace:PicBro.Shell.Windows.Properties"
+             mc:Ignorable="d"
+             d:DesignHeight="80"
+             d:DesignWidth="700">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+    </UserControl.Resources>
+    <Grid SnapsToDevicePixels="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Background="{Binding Source={x:Static properties:Settings.Default},Path=FooterBackground}"
+                Grid.Row="1">
+            <Grid>
+                <Grid.Resources>
+                    <DataTemplate x:Key="ImageModelDragTemplate">
+                        <Grid Background="Transparent"
+                              Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.Effect>
+                                    <DropShadowEffect ShadowDepth="0"
+                                                      Opacity="0.7"
+                                                      BlurRadius="2" />
+                                </Grid.Effect>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding ThumbDataSmall}"
+                                                   Width="55"
+                                                   Height="55"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Stretch="UniformToFill" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </Grid.Resources>
+                <ListBox AllowDrop="True"
+                         ItemsSource="{Binding Images}"
+                         Background="{Binding Source={x:Static properties:Settings.Default},Path=FooterBackground}"
+                         x:Name="FooterImageListBox"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         SelectedItem="{Binding SelectedImage,Mode=TwoWay}"
+                         dragdroputils:DragDropHelper.DragDropTemplate="{StaticResource ImageModelDragTemplate}"
+                         dragdroputils:DragDropHelper.IsInsertionAdornerVisible="True"
+                         dragdroputils:DragDropHelper.DefaultDragDropEffect="Move"
+                         dragdroputils:DragDropHelper.IsSingleSelection="True"
+                         dragdroputils:DragDropHelper.IsDragSource="True"
+                         dragdroputils:DragDropHelper.IsDropTarget="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding OpenCommand}"
+                                                   CommandParameter="{Binding ElementName=list, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem"
+                               BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" ItemWidth="100" ItemHeight="100"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="Transparent"
+                                  x:Name="TopGrid"
+                                  Margin="5"
+                                  Tag="{Binding DataContext, ElementName=FooterImageListBox}">
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Delete"
+                                                  Command="{Binding Path=PlacementTarget.Tag.DeleteCommand, 
+                                            RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.Effect>
+                                        <DropShadowEffect ShadowDepth="0"
+                                                          Opacity="1"
+                                                          BlurRadius="2" />
+                                    </Grid.Effect>
+                                    <Image Source="{Binding ThumbDataSmall}"
+                                           Margin="5"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Stretch="UniformToFill" />
+                                    <Button VerticalAlignment="Top"
+                                            Height="20"
+                                            Opacity="0.6"
+                                            Width="50"
+                                            HorizontalAlignment="Center"
+                                            Command="{Binding Path=DataContext.DeleteCommand,RelativeSource={RelativeSource FindAncestor,AncestorType=ListBox}}"
+                                            CommandParameter="{Binding Path=DataContext,RelativeSource={RelativeSource Self}}"
+                                            Padding="0"
+                                            Visibility="Collapsed"
+                                            Content="X"
+                                            x:Name="DeleteButton" />
+                                </Grid>
+                                <!--<TextBlock Text="{Binding Name}"
+                                   Margin="3"
+                                   Width="100"
+                                   HorizontalAlignment="Left"
+                                   TextTrimming="CharacterEllipsis"
+                                   Grid.Row="1" />-->
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=TopGrid,Path=IsMouseOver}"
+                                             Value="True">
+                                    <Setter TargetName="DeleteButton"
+                                            Property="Visibility"
+                                            Value="Visible"></Setter>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Text="DROP YOUR IMAGES HERE"
+                           Foreground="{Binding Source={x:Static properties:Settings.Default}, Path=BackgroundTextColor}"
+                           Visibility="{Binding IsDropListEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Opacity="0.7" />
+            </Grid>
+        </Border>
+        <Grid Grid.Column="2"
+              Grid.Row="1"
+              Background="{Binding Source={x:Static properties:Settings.Default},Path=FooterBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="8 0 3 0"
+                        VerticalAlignment="Center">
+                <Button Width="45"
+                        Height="45"
+                        Command="{Binding ExportCommand}"
+                        Style="{DynamicResource MetroButtonStyleCircle}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="3 0">
+                    <Image Source="/Assets/Export.png"
+                           Stretch="Uniform"
+                           Width="16" />
+                </Button>
+                <TextBlock Text="EXPORT"
+                           FontSize="11"
+                           HorizontalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Margin="3 0"
+                        VerticalAlignment="Center">
+                <Button Width="45"
+                        Height="45"
+                        Command="{Binding EmailCommand}"
+                        Style="{DynamicResource MetroButtonStyleCircle}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="3 0">
+                    <Image Source="/Assets/Mail-01.png"
+                           Stretch="Uniform"
+                           Width="16" />
+                </Button>
+                <TextBlock Text="EMAIL"
+                           FontSize="11"
+                           HorizontalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Margin="3 0 8 0">
+                <Button Width="45"
+                        Height="45"
+                        Command="{Binding SlideShowCommand}"
+                        Style="{DynamicResource MetroButtonStyleCircle}"
+                        HorizontalAlignment="Center"
+                        Margin="3 0">
+                    <Image Source="/Assets/slideshow.png"
+                           Stretch="Uniform"
+                           Width="16" />
+                </Button>
+                <TextBlock Text="SLIDE SHOW"
+                           FontSize="11"
+                           HorizontalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+        <ProgressBar Grid.ColumnSpan="3"
+                     Grid.Row="1"
+                     BorderThickness="0"
+                     VerticalAlignment="Top"
+                     Height="4"
+                     Style="{x:Null}"
+                     Foreground="{DynamicResource AccentColorBrush}"
+                     Background="Transparent"
+                     Value="{Binding Progress}" />
+        <Border Grid.ColumnSpan="3"
+                Width="150"
+                Visibility="{Binding ShowProgress, Converter={StaticResource VisibilityConverter}}"
+                Margin="0 -150 20 0"
+                HorizontalAlignment="Right"
+                Grid.RowSpan="2"
+                Background="{DynamicResource AccentColorBrush}"
+                Height="50">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0"
+                                  BlurRadius="5" />
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image Grid.RowSpan="2"
+                       Source="{Binding Data}"
+                       Margin="5"
+                       Width="40"
+                       Height="40" />
+                <TextBlock Text="{Binding ProgressText}"
+                           Grid.Column="1"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="3" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Text="{Binding ProgressValue, StringFormat='\{0\}%'}"
+                           Margin="3" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
