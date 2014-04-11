@@ -68,3 +68,6 @@ E:\Workspace\PowerPic\Main\Source\Build\x64\SQLite.Interop.dll
 E:\Workspace\PowerPic\Main\Source\Build\x86\SQLite.Interop.dll
 E:\Workspace\PowerPic\Main\Source\Build\PicBro.Shell.Windows.exe
 E:\Workspace\PowerPic\Main\Source\Build\PicBro.Shell.Windows.pdb
+E:\Workspace\New Powerpic\Source\Build\PicBro.Shell.Windows.exe.config
+E:\Workspace\New Powerpic\Source\PicBro.Shell.Windows\obj\Release\PicBro.Shell.Windows.exe
+E:\Workspace\New Powerpic\Source\PicBro.Shell.Windows\obj\Release\PicBro.Shell.Windows.pdb

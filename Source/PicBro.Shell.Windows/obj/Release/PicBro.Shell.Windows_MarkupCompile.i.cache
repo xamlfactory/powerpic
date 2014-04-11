@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Workspace\PowerPic\Main\Source\PicBro.Shell.Windows\obj\Release\
+E:\Workspace\New Powerpic\Source\PicBro.Shell.Windows\obj\Release\
 PicBro.Shell.Windows
 none
 false
 TRACE
-E:\Workspace\PowerPic\Main\Source\PicBro.Shell.Windows\App.xaml
+E:\Workspace\New Powerpic\Source\PicBro.Shell.Windows\App.xaml
 20-2144084244
 1-1337239694
 7080412894
-271240972882
+27-852074504
 Shell.xaml;Views\About\AboutDialog.xaml;Views\AddFolderView.xaml;Views\AppSplashScreen.xaml;Views\Dialogs\ConfirmationDialog.xaml;Views\Dialogs\ExportDialog.xaml;Views\Dialogs\FolderPropertiesDialog.xaml;Views\FolderListView.xaml;Views\FooterView.xaml;Views\ImageDetailView.xaml;Views\ImageHeaderView.xaml;Views\ImageView.xaml;Views\ImageListView.xaml;Views\MenuBarView.xaml;Views\SearchDetailView.xaml;Views\SearchSettingsWindow.xaml;Views\SettingsWindow.xaml;Views\SlideShowWindow.xaml;Views\TagView.xaml;Views\TutorialView.xaml;
 
-False
+True
 
