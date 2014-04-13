@@ -63,6 +63,7 @@
                          ItemsSource="{Binding Images}"
                          Background="{Binding Source={x:Static properties:Settings.Default},Path=FooterBackground}"
                          x:Name="FooterImageListBox"
+                         Drop="FooterImageListBox_Drop"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          SelectedItem="{Binding SelectedImage,Mode=TwoWay}"
                          dragdroputils:DragDropHelper.DragDropTemplate="{StaticResource ImageModelDragTemplate}"
@@ -108,10 +109,6 @@
                                                   CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
                                     </ContextMenu>
                                 </Grid.ContextMenu>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
                                 <Grid>
                                     <Grid.Effect>
                                         <DropShadowEffect ShadowDepth="0"
@@ -119,10 +116,9 @@
                                                           BlurRadius="2" />
                                     </Grid.Effect>
                                     <Image Source="{Binding ThumbDataSmall}"
-                                           Margin="5"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
-                                           Stretch="UniformToFill" />
+                                           Stretch="Uniform" />
                                     <Button VerticalAlignment="Top"
                                             Height="20"
                                             Opacity="0.6"
@@ -135,12 +131,6 @@
                                             Content="X"
                                             x:Name="DeleteButton" />
                                 </Grid>
-                                <!--<TextBlock Text="{Binding Name}"
-                                   Margin="3"
-                                   Width="100"
-                                   HorizontalAlignment="Left"
-                                   TextTrimming="CharacterEllipsis"
-                                   Grid.Row="1" />-->
                             </Grid>
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=TopGrid,Path=IsMouseOver}"

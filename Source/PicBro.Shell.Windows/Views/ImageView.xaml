@@ -38,7 +38,6 @@
                       Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition />
-
                     </Grid.RowDefinitions>
                     <Grid>
                         <Grid.Effect>
@@ -46,14 +45,12 @@
                                               Opacity="0.7"
                                               BlurRadius="2" />
                         </Grid.Effect>
-
                         <Image Source="{Binding ThumbDataSmall}"
                                Width="55"
                                Height="55"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Stretch="UniformToFill" />
-
                     </Grid>
                 </Grid>
             </DataTemplate>
@@ -63,7 +60,6 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid>
-
             <foundation:ZoomContainer IsManipulationEnabled="True">
                 <Border  dragdroputils:DragDropHelper.IsDragSource="True"
                          Grid.Row="1"
@@ -72,8 +68,13 @@
                          dragdroputils:DragDropHelper.DefaultDragDropEffect="Copy"
                          Margin="20"
                          dragdroputils:DragDropHelper.DragDropTemplate="{StaticResource ImageModelDragTemplate}">
-                    <Image Source="{Binding Image}"
-                           Stretch="Uniform" />
+                    <Border BorderBrush="{DynamicResource AccentColorBrush}"
+                            BorderThickness="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <Image Source="{Binding Image}"
+                               Stretch="Uniform" />
+                    </Border>
                 </Border>
             </foundation:ZoomContainer>
         </Grid>
@@ -97,7 +98,6 @@
                                 Modifiers="Control"
                                 Command="{Binding AddToFlimStripCommand}" />
                 </Button.InputBindings>
-
             </Button>
             <Button Content="à"
                     Padding="0"
@@ -115,7 +115,6 @@
                                 Modifiers="Control"
                                 Command="{Binding AddToFlimStripCommand}" />
                 </Button.InputBindings>
-
             </Button>
         </StackPanel>
     </Grid>

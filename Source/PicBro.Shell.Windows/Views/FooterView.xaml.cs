@@ -18,5 +18,10 @@ namespace PicBro.Shell.Windows.Views
         {
             this.DataContext = viewmodel;
         }
+
+        private void FooterImageListBox_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+
+        }
     }
 }

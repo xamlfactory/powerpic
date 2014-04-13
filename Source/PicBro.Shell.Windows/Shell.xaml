@@ -13,6 +13,10 @@
                       MinWidth="650"
                       MinHeight="450"
                       ShowTitleBar="False"
+                      UseNoneWindowStyle="True"
+                      ShowMaxRestoreButton="True"
+                      ShowCloseButton="True"
+                      ShowMinButton="True"
                       TitlebarHeight="40"
                       Background="{Binding Source={x:Static properties:Settings.Default}, Path=MainBackground}"
                       Focusable="False"
@@ -22,6 +26,7 @@
                       BorderBrush="{DynamicResource AccentColorBrush}"
                       BorderThickness="0.6 3"
                       WindowState="Maximized"
+                      IgnoreTaskbarOnMaximize="False"
                       WindowStartupLocation="CenterScreen"
                       WindowTransitionsEnabled="True">
     <Controls:MetroWindow.InputBindings>
@@ -114,10 +119,8 @@
                             VerticalAlignment="Top"
                             Margin="8 0"
                             prism:RegionManager.RegionName="{x:Static common:RegionNames.MenuBarRegion}" />
-
             <ContentControl Grid.Row="1"
                             prism:RegionManager.RegionName="{x:Static common:RegionNames.NavigationRegion}" />
-
             <GridSplitter Grid.Column="1"
                           Grid.Row="1"
                           Width="2"
@@ -127,16 +130,13 @@
                           HorizontalAlignment="Center"
                           VerticalAlignment="Stretch"
                           IsTabStop="False" />
-
             <ContentControl Grid.Column="2"
                             Grid.Row="1"
                             prism:RegionManager.RegionName="{x:Static common:RegionNames.MainContentRegion}" />
-
             <ContentControl Grid.Row="1"
                             Grid.Column="3"
                             HorizontalAlignment="Right"
                             prism:RegionManager.RegionName="{x:Static common:RegionNames.RightNavigationRegion}" />
-
             <GridSplitter Grid.Row="2"
                           Grid.ColumnSpan="4"
                           Height="2"
@@ -145,10 +145,37 @@
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Center"
                           IsTabStop="False" />
-
             <ContentControl Grid.ColumnSpan="4"
                             Grid.Row="3"
                             prism:RegionManager.RegionName="{x:Static common:RegionNames.FooterRegion}" />
         </Grid>
+        <Viewbox Stretch="Uniform"
+                 Width="100"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="0"
+                        Background="Transparent"
+                        x:Name="min"
+                        Click="MinimizeWindow"
+                        FontFamily="Webdings" />
+                <Button Content="1"
+                        Click="MaximizeWindow"
+                        Background="Transparent"
+                        x:Name="max"
+                        Visibility="Collapsed"
+                        FontFamily="Webdings" />
+                <Button Content="2"
+                        x:Name="res"
+                        Click="RestoreWindow"
+                        Background="Transparent"
+                        FontFamily="Webdings" />
+                <Button Content="r"
+                        x:Name="close"
+                        Click="CloseWindow"
+                        Background="Transparent"
+                        FontFamily="Webdings" />
+            </StackPanel>
+        </Viewbox>
     </Grid>
 </Controls:MetroWindow>

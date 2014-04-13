@@ -5,6 +5,8 @@
                       Title="SEARCH OPTIONS"
                       SizeToContent="Height"
                       ShowInTaskbar="False"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="1"
                       xmlns:utils="clr-namespace:PicBro.Foundation.Windows.Utils;assembly=PicBro.Foundation.Windows"
                       WindowStartupLocation="CenterOwner"
                       ResizeMode="NoResize"

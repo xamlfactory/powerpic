@@ -3,6 +3,8 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="EXPORT"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="1"
                       SizeToContent="Height"
                       ShowInTaskbar="False"
                       xmlns:utils="clr-namespace:PicBro.Foundation.Windows.Utils;assembly=PicBro.Foundation.Windows"

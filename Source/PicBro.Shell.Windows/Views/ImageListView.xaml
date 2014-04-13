@@ -204,7 +204,7 @@
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}"
                                      Value="True">
                             <Setter Property="BorderBrush"
-                                    Value="#3DADDD"
+                                    Value="{DynamicResource AccentColorBrush}"
                                     TargetName="border" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding ImageThumbSize}"

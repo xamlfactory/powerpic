@@ -28,5 +28,29 @@
         {
             this.DataContext = viewModel;
         }
+
+        private void MinimizeWindow(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Minimized;
+        }
+
+        private void MaximizeWindow(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Maximized;
+            this.max.Visibility = System.Windows.Visibility.Collapsed;
+            this.res.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void RestoreWindow(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Normal;
+            this.max.Visibility = System.Windows.Visibility.Visible;
+            this.res.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

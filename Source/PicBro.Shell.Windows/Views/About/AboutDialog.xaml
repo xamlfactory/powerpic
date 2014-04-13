@@ -4,6 +4,8 @@
                       WindowStartupLocation="CenterOwner"
                       ResizeMode="NoResize"
                       SizeToContent="Height"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="1"
                       ShowInTaskbar="False"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="About"
