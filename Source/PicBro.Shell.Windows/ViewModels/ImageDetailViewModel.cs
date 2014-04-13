@@ -90,12 +90,7 @@ namespace PicBro.Shell.Windows.ViewModels
 
         public bool IsTagsAvailable
         {
-            get { return isTagsAvailable; }
-            set
-            {
-                isTagsAvailable = value;
-                this.RaisePropertyChanged(() => this.IsTagsAvailable);
-            }
+            get { return  this.Image != null && this.Image.Tags.Count > 0; }
         }
         public ImageModel Image
         {
@@ -197,7 +192,7 @@ namespace PicBro.Shell.Windows.ViewModels
             if (NewTag.Trim() != string.Empty)
             {
                 this.Image.Tags.Add(NewTag);
-                if (this.Image.Tags.Count > 0) IsTagsAvailable = true;
+                this.RaisePropertyChanged(() => this.IsTagsAvailable);
                 try
                 {
                     this.dataService.InsertTag(NewTag, this.Image.ID);
@@ -224,7 +219,7 @@ namespace PicBro.Shell.Windows.ViewModels
                 if (args != null && this.Image != null)
                 {
                     this.Image.Tags.Remove(args.ToString());
-                    if (this.Image.Tags.Count == 0) IsTagsAvailable = false;
+                    this.RaisePropertyChanged(() => this.IsTagsAvailable);
                     await this.dataService.RemoveTagForImage(this.Image.ID, args.ToString());
                 }
             }
@@ -240,8 +235,8 @@ namespace PicBro.Shell.Windows.ViewModels
             {
                 if (this.Image != null)
                 {
-                    this.Image.Tags.Clear();
-                    this.IsTagsAvailable = false;
+                    this.Image.Tags.Clear(); 
+                    this.RaisePropertyChanged(() => this.IsTagsAvailable);
                     await this.dataService.RemoveAllTags(this.Image.ID);
                 }
             }
@@ -291,8 +286,7 @@ namespace PicBro.Shell.Windows.ViewModels
                     string tags = await this.dataService.GetTagsForImage(this.Image.ID);
                     string[] tagsSplited = tags.Split(',');
                     this.Image.Tags = tagsSplited.ToObservableCollection<string>();
-                    if (this.Image.Tags.Count > 0)
-                        this.IsTagsAvailable = true;
+                    this.RaisePropertyChanged(() => this.IsTagsAvailable);
                 }
             }
             catch (Exception)
