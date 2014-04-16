@@ -24,10 +24,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
-        <TextBlock Text="Images Count " Margin="10"/>
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_ImagesCount}" Margin="10"/>
         <TextBlock Text="Loading..." Name="ImageCount" Grid.Column="1" Margin="10"/>
-
-        <TextBlock Text="Total Size " Grid.Row="1" Margin="10"/>
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_TotalSize}" Grid.Row="1" Margin="10"/>
         <TextBlock Text="Loading..." Grid.Row="1" Name="TotalSize" Grid.Column="1" Margin="10"/>
 
     </Grid>

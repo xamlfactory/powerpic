@@ -31,7 +31,7 @@ namespace PicBro.Shell.Windows.ViewModels
         private List<ImageModel> images;
         private ImageModel selectedImage;
 
-        private int ImageTileSize
+        public int ImageTileSize
         {
             get { return Properties.Settings.Default.ImageTileSize; }
         }

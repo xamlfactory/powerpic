@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:behaviors="clr-namespace:PicBro.Shell.Windows.Behaviors"
-             xmlns:resources="clr-namespace:PicBro.Globalization.Windows;assembly=PicBro.Globalization.Windows"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:converter="clr-namespace:PicBro.Shell.Windows.Converter"
              xmlns:properties="clr-namespace:PicBro.Shell.Windows.Properties"
@@ -50,10 +49,10 @@
         <Menu FontSize="14"
               Grid.ColumnSpan="2"
               Background="Transparent">
-            <MenuItem Header="FILE">
-                <MenuItem Header="_Add directory"
+            <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_File}">
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_AddDirectory}"
                           Command="{Binding AddFolderCommand}" />
-                <MenuItem Header="Remove from Database"
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_RemoveFromDataBase}"
                           Command="{Binding RemoveFolderFromDBCommand}">
                     <MenuItem.Icon>
                         <Image Source="/Assets/delete.png"
@@ -61,13 +60,13 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="E_xit"
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Exit}"
                           Command="{Binding ExitCommand}" />
             </MenuItem>
-            <MenuItem Header="HELP">
-                <MenuItem Header="About"
+            <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Help}">
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_About}"
                           Click="OnAbout" />
-                <MenuItem Header="Tutorial"
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Tutorial}"
                           Command="{Binding LaunchTutorialCommand}">
                     <MenuItem.Icon>
                         <Image Source="/Assets/help_16.png"
@@ -151,32 +150,32 @@
                     </Style>
                 </MenuItem.ItemContainerStyle>
                 <MenuItem x:Name="NameMenuItem"
-                          Header="Name"
+                          Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Name}"
                           VerticalAlignment="Center"
                           VerticalContentAlignment="Center"
                           Command="{Binding SortCommand}"
                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
                 </MenuItem>
                 <MenuItem Name="DateMenuItem"
-                          Header="Date Modified"
+                          Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_DateModified}"
                           VerticalContentAlignment="Center"
                           Command="{Binding SortCommand}"
                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
                 </MenuItem>
                 <MenuItem Name="SizeMenuItem"
-                          Header="Size"
+                          Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Size}"
                           Command="{Binding SortCommand}"
                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                           VerticalContentAlignment="Center">
                 </MenuItem>
                 <MenuItem Name="TypeMenuItem"
-                          Header="Type"
+                          Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Type}"
                           Command="{Binding SortCommand}"
                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                           VerticalContentAlignment="Center">
                 </MenuItem>
                 <MenuItem Name="PopularityMenuItem"
-                          Header="Popularity"
+                          Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Popularity}"
                           Command="{Binding SortCommand}"
                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                           VerticalContentAlignment="Center">

@@ -57,6 +57,9 @@
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Infralution.Localization.Wpf">
+      <HintPath>..\..\..\..\Downloads\wpflocalization\Infralution.Localization.Wpf\bin\Release\Infralution.Localization.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=0.12.1.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MahApps.Metro.0.12.1.0\lib\net45\MahApps.Metro.dll</HintPath>
@@ -136,6 +139,11 @@
     <Compile Include="Events\SearchEvent.cs" />
     <Compile Include="Events\SelectedFolderChangedEvent.cs" />
     <Compile Include="Events\ThumbSizeChangedEvent.cs" />
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <DependentUpon>Resources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ViewModels\AddFolderViewModel.cs" />
     <Compile Include="ViewModels\AppSplashScreenViewModel.cs" />
     <Compile Include="ViewModels\FolderListViewModel.cs" />
@@ -311,6 +319,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -373,10 +385,6 @@
     <ProjectReference Include="..\PicBro.Foundation.Windows\PicBro.Foundation.Windows.csproj">
       <Project>{247dbe87-fe14-46a3-b081-4f6fbc237731}</Project>
       <Name>PicBro.Foundation.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PicBro.Globalization.Windows\PicBro.Globalization.Windows.csproj">
-      <Project>{a0b6afba-8948-4194-9a30-3c917f3a18ec}</Project>
-      <Name>PicBro.Globalization.Windows</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

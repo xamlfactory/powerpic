@@ -24,17 +24,17 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="115" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="User Interface"
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_UserInterface}"
                    Style="{StaticResource GroupHeaderTextBlockStyle}" />
-
         <!--First Row-->
-        <TextBlock Text="Select theme"
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_SelectTheme}"
                    Grid.Row="1"
                    Margin="10,0,10,10"
                    Style="{StaticResource LabelTextBlockStyle}" />
@@ -47,11 +47,9 @@
                   Foreground="DarkBlue"
                   FontSize="14"
                   ItemsSource="{Binding Accents}"
-                  VerticalAlignment="Center">
-        </ComboBox>
-
+                  VerticalAlignment="Center"></ComboBox>
         <!--Second Row-->
-        <TextBlock Text="Background"
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_Background}"
                    Grid.Row="2"
                    Margin="10,1,10,10"
                    Style="{StaticResource LabelTextBlockStyle}" />
@@ -62,11 +60,9 @@
                   BorderBrush="DarkBlue"
                   Foreground="DarkBlue"
                   FontSize="14"
-                  VerticalAlignment="Center">
-        </ComboBox>
-
+                  VerticalAlignment="Center"></ComboBox>
         <!--3rd Row-->
-        <TextBlock Text="Align Tag Pane"
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_AlignTagPane}"
                    Grid.Row="3"
                    Margin="10,1,10,10"
                    Style="{StaticResource LabelTextBlockStyle}" />
@@ -78,24 +74,34 @@
                   Foreground="DarkBlue"
                   FontSize="14"
                   VerticalAlignment="Center"
-                  SelectionChanged="TagPaneList_SelectionChanged">
-        </ComboBox>
-
+                  SelectionChanged="TagPaneList_SelectionChanged"></ComboBox>
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_Language}"
+                   Grid.Row="4"
+                   Margin="10,1,10,10"
+                   Style="{StaticResource LabelTextBlockStyle}" />
+        <ComboBox x:Name="LanguagesList"
+                  Grid.Column="1"
+                  Grid.Row="4"
+                  Margin="10,1,10,10"
+                  BorderBrush="DarkBlue"
+                  Foreground="DarkBlue"
+                  FontSize="14"
+                  VerticalAlignment="Center"
+                  SelectionChanged="Languages_SelectionChanged"></ComboBox>
         <!--4th Row-->
-        <TextBlock Grid.Row="4"
-                   Text="File Settings"
+        <TextBlock Grid.Row="5"
+                   Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_FileSettings}"
                    Style="{StaticResource GroupHeaderTextBlockStyle}"
                    Margin="10,18,0,10" />
-
         <!--5th row-->
-        <TextBlock Text="Image types"
-                   Grid.Row="5"
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_ImageTypes}"
+                   Grid.Row="6"
                    Margin="10,0"
                    VerticalAlignment="Top"
                    Style="{StaticResource LabelTextBlockStyle}" />
         <ListBox x:Name="list"
                  Grid.Column="1"
-                 Grid.Row="5"
+                 Grid.Row="6"
                  Margin="10,0"
                  SelectionMode="Multiple"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -124,35 +130,31 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-
         <!--6th Row-->
-        <TextBlock Grid.Row="6"
+        <TextBlock Grid.Row="7"
                    Grid.ColumnSpan="2"
                    Margin="10,6"
                    Style="{StaticResource LabelTextBlockStyle}"
                    TextWrapping="Wrap"
-                   Text="Rescan the directories in the local database and remove all orphaned thumbs:" />
-
+                   Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_ScanMessage}" />
         <!--7th row-->
         <Button  x:Name="CleanupDatabase"
-                 Grid.Row="7"
+                 Grid.Row="8"
                  Grid.ColumnSpan="2"
                  Margin="10,6"
-                 Content="CLEANUP DATABASE"
+                 Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_CleanDB}"
                  Click="CleanupDatabase_Click" />
-
         <!--8th row-->
-        <TextBlock Text="Advanced Settings"
-                   Grid.Row="8"
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_AdvancedSettings}"
+                   Grid.Row="9"
                    Grid.ColumnSpan="2"
                    Margin="10,16,10,0"
                    Style="{StaticResource GroupHeaderTextBlockStyle}" />
-
         <!--9th row-->
-        <TextBlock Text="Local Database"
-                   Grid.Row="9"
+        <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_DBPath}"
+                   Grid.Row="10"
                    Style="{StaticResource LabelTextBlockStyle}" />
-        <Grid Grid.Row="9"
+        <Grid Grid.Row="10"
               Grid.Column="2"
               Margin="10">
             <Grid.ColumnDefinitions>
@@ -170,9 +172,8 @@
                     VerticalAlignment="Bottom"
                     Margin="5,0,0,0" />
         </Grid>
-
         <!--10th row-->
-        <Button Grid.Row="10"
+        <Button Grid.Row="11"
                 Margin="10,5"
                 Click="OnReset"
                 Grid.ColumnSpan="2">
@@ -181,25 +182,24 @@
                        Margin="5 1"
                        Stretch="Uniform"
                        Width="16" />
-                <TextBlock Text="CLEAR ALL DATA"
+                <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_ClearAllData}"
                            TextAlignment="Center"
                            Width="130"
                            Background="#BFBFBF" />
             </StackPanel>
         </Button>
-
         <!--11th row-->
-        <Button Grid.Row="11"
+        <Button Grid.Row="12"
                 Margin="10,20,10,10"
                 Grid.ColumnSpan="2"
-                Content="Save"
+                Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_Save}"
                 Padding="15 2"
                 Click="OnSave"
                 HorizontalAlignment="Right" />
-        <Button Grid.Row="11"
+        <Button Grid.Row="12"
                 Margin="10 20 80 10"
                 Grid.ColumnSpan="2"
-                Content="Reset Settings"
+                Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_ResetSettings}"
                 Padding="15 2"
                 Click="OnResetSettings"
                 HorizontalAlignment="Right" />

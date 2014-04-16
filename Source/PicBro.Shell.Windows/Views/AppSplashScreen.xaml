@@ -32,11 +32,11 @@
             </Grid.RowDefinitions>
             <TextBlock Margin="10 10 10 0"
                        VerticalAlignment="Top"
-                       Text="Thank you for using our product. We hope you find this software as useful as we do. Are there any features missing? Is there anything else you would like to see?  "
+                       Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_Splash}"
                        TextWrapping="Wrap" />
             <StackPanel Margin="10"
                         Grid.Row="1">
-                <TextBlock Text="Please let us know at:" />
+                <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_Please}" />
                 <Frame>
                     <Frame.Content>
                         <TextBlock><Hyperlink NavigateUri="mailto://feedback@symposity.com">feedback@symposity.com</Hyperlink></TextBlock>

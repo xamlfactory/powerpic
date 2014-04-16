@@ -19,6 +19,38 @@ namespace PicBro.Foundation.Windows.Components
             this.SizeChanged += ZoomContainer_SizeChanged;
         }
 
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            base.OnPreviewKeyDown(e);
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            {
+                if (e.Key == Key.OemPlus)
+                {
+                    var element = e.OriginalSource as UIElement;
+                    var transformation = element.RenderTransform
+                                                 as MatrixTransform;
+                    var matrix = transformation == null ? Matrix.Identity :
+                                                   transformation.Matrix;
+                    matrix.ScaleAt(1.3, 1.3, this.ActualWidth / 2, this.ActualHeight / 2); 
+
+                    element.RenderTransform = new MatrixTransform(matrix);
+                    e.Handled = true;
+                }
+                if (e.Key == Key.OemMinus)
+                {
+                    var element = e.OriginalSource as UIElement;
+                    var transformation = element.RenderTransform
+                                                 as MatrixTransform;
+                    var matrix = transformation == null ? Matrix.Identity :
+                                                   transformation.Matrix;
+                    matrix.ScaleAt(0.7, 0.7, this.ActualWidth / 2, this.ActualHeight / 2);
+
+                    element.RenderTransform = new MatrixTransform(matrix);
+                    e.Handled = true;
+                }
+            }
+        }
+
         void ZoomContainer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((FrameworkElement)this.Parent).Clip = new RectangleGeometry(new Rect(0, 0, this.ActualWidth, this.ActualHeight));
@@ -26,6 +58,7 @@ namespace PicBro.Foundation.Windows.Components
 
         private void ZoomContainer_Loaded(object sender, RoutedEventArgs e)
         {
+            this.Focus();
             ((FrameworkElement)this.Parent).Clip = new RectangleGeometry(new Rect(0, 0, this.ActualWidth, this.ActualHeight));
         }
 

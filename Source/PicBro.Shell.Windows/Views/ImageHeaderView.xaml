@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:resources="clr-namespace:PicBro.Globalization.Windows;assembly=PicBro.Globalization.Windows"
              xmlns:converter="clr-namespace:PicBro.Shell.Windows.Converter"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -49,24 +48,23 @@
         <Menu FontSize="14"
               Grid.ColumnSpan="2"
               Background="Transparent">
-            <MenuItem Header="FILE">
-                <MenuItem Header="_Add directory"
+            <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_File}">
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_AddDirectory}"
                           Command="{Binding AddFolderCommand}" />
 
                 <Separator />
-                <MenuItem Header="E_xit"
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Exit}"
                           Command="{Binding ExitCommand}" />
             </MenuItem>
-
-            <MenuItem Header="HELP">
-                <MenuItem Header="About"
+            <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Help}">
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_About}"
                           Click="OnAbout" />
-                <MenuItem Header="Tutorial"
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Tutorial}"
                           Command="{Binding LaunchTutorialCommand}" />
             </MenuItem>
         </Menu>
         <Button Grid.Row="1"
-                Content="BACK"
+                Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_Back}"
                 Margin="5"
                 Command="{Binding BackCommand}"
                 FontSize="12"

@@ -143,7 +143,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <TextBlock Text="DROP YOUR IMAGES HERE"
+                <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=DropImages}"
                            Foreground="{Binding Source={x:Static properties:Settings.Default}, Path=BackgroundTextColor}"
                            Visibility="{Binding IsDropListEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                            VerticalAlignment="Center"
@@ -172,7 +172,7 @@
                            Stretch="Uniform"
                            Width="16" />
                 </Button>
-                <TextBlock Text="EXPORT"
+                <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_Export}"
                            FontSize="11"
                            HorizontalAlignment="Center" />
             </StackPanel>
@@ -190,7 +190,7 @@
                            Stretch="Uniform"
                            Width="16" />
                 </Button>
-                <TextBlock Text="EMAIL"
+                <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_Email}"
                            FontSize="11"
                            HorizontalAlignment="Center" />
             </StackPanel>
@@ -207,7 +207,7 @@
                            Stretch="Uniform"
                            Width="16" />
                 </Button>
-                <TextBlock Text="SLIDE SHOW"
+                <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_Slide}"
                            FontSize="11"
                            HorizontalAlignment="Center" />
             </StackPanel>

@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,147 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Button_About" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="Button_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Button_AddToFavorites" xml:space="preserve">
+    <value>Add To Favorites</value>
+  </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>BACK</value>
+  </data>
+  <data name="Button_CleanDB" xml:space="preserve">
+    <value>CLEANUP DATABASE</value>
+  </data>
+  <data name="Button_ClearAllTags" xml:space="preserve">
+    <value>Clear All Tags</value>
+  </data>
+  <data name="Button_Email" xml:space="preserve">
+    <value>EMAIL</value>
+  </data>
+  <data name="Button_Export" xml:space="preserve">
+    <value>EXPORT</value>
+  </data>
+  <data name="Button_ResetSettings" xml:space="preserve">
+    <value>Reset Settings</value>
+  </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Button_Settings" xml:space="preserve">
+    <value>settings</value>
+  </data>
+  <data name="Button_Slide" xml:space="preserve">
+    <value>SLIDESHOW</value>
+  </data>
+  <data name="DropImages" xml:space="preserve">
+    <value>DROP IMAGES HERE</value>
+  </data>
+  <data name="Label_AdvancedSettings" xml:space="preserve">
+    <value>Advanced Settings</value>
+  </data>
+  <data name="Label_AlignTagPane" xml:space="preserve">
+    <value>Align Tag Pane</value>
+  </data>
+  <data name="Label_Background" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="Label_ClearAllData" xml:space="preserve">
+    <value>CLEAR ALL DATA</value>
+  </data>
+  <data name="Label_DBPath" xml:space="preserve">
+    <value>Database Path</value>
+  </data>
+  <data name="Label_FileSettings" xml:space="preserve">
+    <value>File Settings</value>
+  </data>
+  <data name="Label_ImagesCount" xml:space="preserve">
+    <value>Images Count</value>
+  </data>
+  <data name="Label_ImageTypes" xml:space="preserve">
+    <value>Image Types</value>
+  </data>
+  <data name="Label_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Label_OTHER" xml:space="preserve">
+    <value>OTHER</value>
+  </data>
+  <data name="Label_Please" xml:space="preserve">
+    <value>Please let us know at:</value>
+  </data>
+  <data name="Label_ScanMessage" xml:space="preserve">
+    <value>Rescan the directories in the local database and remove all orphaned thumbs:</value>
+  </data>
+  <data name="Label_SearchFavoritesOnly" xml:space="preserve">
+    <value>Search Favorites Only</value>
+  </data>
+  <data name="Label_SearchInDescription" xml:space="preserve">
+    <value>Search In Description</value>
+  </data>
+  <data name="Label_SearchInTags" xml:space="preserve">
+    <value>Search In Tags</value>
+  </data>
+  <data name="Label_SEARCHOPTIONS" xml:space="preserve">
+    <value>SEARCH OPTIONS</value>
+  </data>
+  <data name="Label_SearchResult" xml:space="preserve">
+    <value>{}{0} Results found</value>
+  </data>
+  <data name="Label_SelectTheme" xml:space="preserve">
+    <value>Select Theme</value>
+  </data>
+  <data name="Label_Splash" xml:space="preserve">
+    <value>Thank you for using our product. We hope you find this software as useful as we do. Are there any features missing? Is there anything else you would like to see?</value>
+  </data>
+  <data name="Label_TotalSize" xml:space="preserve">
+    <value>Total Size</value>
+  </data>
+  <data name="Label_UserInterface" xml:space="preserve">
+    <value>User Interface</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Menu_AddDirectory" xml:space="preserve">
+    <value>_Add directory</value>
+  </data>
+  <data name="Menu_DateModified" xml:space="preserve">
+    <value>Date Modified</value>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>E_xit</value>
+  </data>
+  <data name="Menu_File" xml:space="preserve">
+    <value>_FILE</value>
+  </data>
+  <data name="Menu_Help" xml:space="preserve">
+    <value>HELP</value>
+  </data>
+  <data name="Menu_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Menu_Popularity" xml:space="preserve">
+    <value>Popularity</value>
+  </data>
+  <data name="Menu_RemoveFromDataBase" xml:space="preserve">
+    <value>Remove from Database</value>
+  </data>
+  <data name="Menu_Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Menu_Tutorial" xml:space="preserve">
+    <value>Tutorial</value>
+  </data>
+  <data name="Menu_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
 </root>

@@ -16,6 +16,12 @@
         {
             InitializeComponent();
             this.Closing += Shell_Closing;
+            this.Loaded += Shell_Loaded;
+        }
+
+        void Shell_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.navigationRegion.Focus();
         }
 
         void Shell_Closing(object sender, System.ComponentModel.CancelEventArgs e)

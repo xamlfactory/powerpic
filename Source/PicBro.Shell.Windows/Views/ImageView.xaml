@@ -63,6 +63,7 @@
             <foundation:ZoomContainer IsManipulationEnabled="True">
                 <Border  dragdroputils:DragDropHelper.IsDragSource="True"
                          Grid.Row="1"
+                         Background="Transparent"
                          dragdroputils:DragDropHelper.IsDragSourceItemsControl="False"
                          dragdroputils:DragDropHelper.DragSourceDataContext="{Binding Path=ImageModel,Mode=TwoWay}"
                          dragdroputils:DragDropHelper.DefaultDragDropEffect="Copy"
@@ -70,6 +71,7 @@
                          dragdroputils:DragDropHelper.DragDropTemplate="{StaticResource ImageModelDragTemplate}">
                     <Border BorderBrush="{DynamicResource AccentColorBrush}"
                             BorderThickness="4"
+                            Background="Transparent"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center">
                         <Image Source="{Binding Image}"

@@ -6,6 +6,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using PicBro.DAL.Windows;
 using PicBro.Shell.Windows.Properties;
+using Infralution.Localization.Wpf;
 
 namespace PicBro.Shell.Windows.Views
 {
@@ -59,6 +60,9 @@ namespace PicBro.Shell.Windows.Views
             this.PopulateAccent();
             this.PopulateBackgrounds();
             this.PopulateTagPaneItems();
+            this.LanguagesList.Items.Add("English");
+            this.LanguagesList.Items.Add("German");
+            this.LanguagesList.SelectedItem = Settings.Default.Language;
         }
 
         private void PopulateTagPaneItems()
@@ -214,6 +218,19 @@ namespace PicBro.Shell.Windows.Views
             {
                 Settings.Default.ShowTagsOnLeft = false;
             }
+        }
+
+        private void Languages_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (LanguagesList.SelectedItem.Equals("English"))
+            {
+                CultureManager.UICulture = new System.Globalization.CultureInfo("en-US");
+            }
+            else
+            {
+                CultureManager.UICulture = new System.Globalization.CultureInfo("de-DE");
+            }
+            Settings.Default.Language = LanguagesList.SelectedItem.ToString();
         }
     }
 }

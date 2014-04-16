@@ -48,7 +48,7 @@
                            FontSize="15"
                            Margin="5" />
                 <ToggleButton Grid.Column="1"
-                              ToolTip="Add to Favorites"
+                              ToolTip="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_AddToFavorites}"
                               IsChecked="{Binding Image.IsFavorite, Mode=TwoWay}"
                               Command="{Binding FavoriteCommand}">
                     <ToggleButton.Style>

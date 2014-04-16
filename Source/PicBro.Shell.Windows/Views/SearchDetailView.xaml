@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">
-    <Border Margin="15 0"            
+    <Border Margin="15 0"
             BorderBrush="Gray">
         <Grid>
             <Grid.RowDefinitions>
@@ -19,7 +19,6 @@
                        FontWeight="SemiBold"
                        FontSize="15"
                        Margin="5" />
-          
         </Grid>
     </Border>
 </UserControl>

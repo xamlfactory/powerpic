@@ -43,7 +43,7 @@
                                     Command="{Binding AddTagCommand}" />
                     </TextBox.InputBindings>
                 </TextBox>
-                <Button Content="Add"
+                <Button Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_Add}"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Command="{Binding AddTagCommand}"
@@ -112,7 +112,7 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
             </ListBox>
-            <Button Content="Clear all tags"
+            <Button Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_ClearAllTags}"
                     Margin="10"
                     Grid.Column="1"
                     Grid.Row="3"

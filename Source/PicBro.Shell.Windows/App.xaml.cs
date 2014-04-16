@@ -1,4 +1,5 @@
-﻿using MahApps.Metro;
+﻿using Infralution.Localization.Wpf;
+using MahApps.Metro;
 using PicBro.DAL.Windows;
 using PicBro.Foundation.Windows.Infrastructure;
 using PicBro.Shell.Windows.Properties;
@@ -32,6 +33,15 @@ namespace PicBro.Shell.Windows
                 
         protected override void OnStartup(StartupEventArgs e)
         {
+            if(Settings.Default.Language.Equals("English"))
+            {
+                CultureManager.UICulture = new System.Globalization.CultureInfo("en-US");
+            }
+            else
+            {
+                CultureManager.UICulture = new System.Globalization.CultureInfo("de-DE");
+            }
+
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
