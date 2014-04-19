@@ -21,25 +21,6 @@ namespace PicBro.Shell.Windows.Views
         {
             InitializeComponent();
             this.Loaded += SettingsWindow_Loaded;
-            this.BackgroundList.SelectionChanged += BackgroundList_SelectionChanged;
-        }
-
-        private void BackgroundList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if (this.BackgroundList.SelectedItem.Equals("Light"))
-            {
-                Properties.Settings.Default.MainBackground = Color.White.Name;
-                Properties.Settings.Default.FooterBackground = "#DCD9DF";
-                Properties.Settings.Default.MenuBackground = Color.White.Name;
-                Properties.Settings.Default.BackgroundTextColor = Color.DarkGray.Name;
-            }
-            else
-            {
-                Properties.Settings.Default.MainBackground = "#FFE0E0E0";
-                Properties.Settings.Default.FooterBackground = Color.DarkGray.Name;
-                Properties.Settings.Default.MenuBackground = Color.LightGray.Name;
-                Properties.Settings.Default.BackgroundTextColor = Color.LightGray.Name;
-            }
         }
 
         private void OnKeyDown(object sender, KeyEventArgs args)
@@ -96,7 +77,7 @@ namespace PicBro.Shell.Windows.Views
         {
             this.BackgroundList.Items.Add("Light");
             this.BackgroundList.Items.Add("Dark");
-            if (Properties.Settings.Default.MainBackground.Equals(Color.White.ToString()))
+            if (Properties.Settings.Default.MainBackground.Equals("White"))
             {
                 this.BackgroundList.SelectedItem = this.BackgroundList.Items[0].ToString();
             }
@@ -104,6 +85,7 @@ namespace PicBro.Shell.Windows.Views
             {
                 this.BackgroundList.SelectedItem = this.BackgroundList.Items[1].ToString();
             }
+
         }
         private void PopulateImageTypes()
         {
@@ -133,10 +115,6 @@ namespace PicBro.Shell.Windows.Views
                 }
             }
 
-            Properties.Settings.Default.Save();
-            Properties.Settings.Default.Reload();
-            this.Close();
-
             if (Properties.Settings.Default.Accent != accent || this.DBLocationPath.Text != dbpath)
             {
                 MetroWindow window = (MetroWindow)App.Current.MainWindow;
@@ -147,6 +125,25 @@ namespace PicBro.Shell.Windows.Views
                     App.Current.Shutdown();
                 }
             }
+
+            if (this.BackgroundList.SelectedItem.Equals("Light"))
+            {
+                Properties.Settings.Default.MainBackground = Color.White.Name;
+                Properties.Settings.Default.FooterBackground = "#DCD9DF";
+                Properties.Settings.Default.MenuBackground = Color.White.Name;
+                Properties.Settings.Default.BackgroundTextColor = Color.DarkGray.Name;
+            }
+            else
+            {
+                Properties.Settings.Default.MainBackground = "#FFE0E0E0";
+                Properties.Settings.Default.FooterBackground = Color.DarkGray.Name;
+                Properties.Settings.Default.MenuBackground = Color.LightGray.Name;
+                Properties.Settings.Default.BackgroundTextColor = Color.LightGray.Name;
+            }
+
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+            this.Close();
         }
 
         private async void OnReset(object sender, RoutedEventArgs e)
