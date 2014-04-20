@@ -31,5 +31,19 @@ namespace PicBro.Shell.Windows.Views
         {
             this.DataContext = viewmodel;
         }
+
+        private void OnEscapeDown(object sender, KeyEventArgs e)
+        {
+            FrameworkElement parent = (FrameworkElement)tagText.Parent;
+            while (parent != null && parent is IInputElement && !((IInputElement)parent).Focusable)
+            {
+                parent = (FrameworkElement)parent.Parent;
+            }
+
+            DependencyObject scope = FocusManager.GetFocusScope(tagText);
+            FocusManager.SetFocusedElement(scope, parent as IInputElement);
+
+            e.Handled = true;
+        }
     }
 }

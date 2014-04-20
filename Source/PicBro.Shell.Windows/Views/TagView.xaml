@@ -36,6 +36,8 @@
                     <ColumnDefinition Width="60" />
                 </Grid.ColumnDefinitions>
                 <TextBox  Margin="5,0,0,0"
+                          KeyDown="OnEscapeDown"
+                          x:Name="tagText"
                           Text="{Binding NewTag,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                           VerticalContentAlignment="Center">
                     <TextBox.InputBindings>

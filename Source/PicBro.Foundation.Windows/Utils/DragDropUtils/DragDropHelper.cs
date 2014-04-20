@@ -438,10 +438,16 @@ namespace PicBro.Foundation.Windows.Utils.DragDropUtils
                 {
                     IEnumerable draggedItems = draggedItem as IEnumerable;
                     foreach (var item in draggedItems)
+                    {
                         Utilities.InsertItemInItemsControl(this.targetItemsControl, item, this.insertionIndex++);
+                        ((ListBox)targetItemsControl).ScrollIntoView(item);
+                    }
                 }
                 else
+                {
                     Utilities.InsertItemInItemsControl(this.targetItemsControl, draggedItem, this.insertionIndex);
+                    ((ListBox)targetItemsControl).ScrollIntoView(draggedItem);
+                }
 
                 RemoveDraggedAdorner();
                 RemoveInsertionAdorner();
