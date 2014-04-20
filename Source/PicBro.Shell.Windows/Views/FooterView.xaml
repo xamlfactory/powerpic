@@ -59,19 +59,20 @@
                         </Grid>
                     </DataTemplate>
                 </Grid.Resources>
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden">
                 <ListBox AllowDrop="True"
                          ItemsSource="{Binding Images}"
                          Background="{Binding Source={x:Static properties:Settings.Default},Path=FooterBackground}"
                          x:Name="FooterImageListBox"
                          Drop="FooterImageListBox_Drop"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          SelectedItem="{Binding SelectedImage,Mode=TwoWay}"
                          dragdroputils:DragDropHelper.DragDropTemplate="{StaticResource ImageModelDragTemplate}"
                          dragdroputils:DragDropHelper.IsInsertionAdornerVisible="True"
                          dragdroputils:DragDropHelper.DefaultDragDropEffect="Move"
                          dragdroputils:DragDropHelper.IsSingleSelection="True"
                          dragdroputils:DragDropHelper.IsDragSource="True"
-                         dragdroputils:DragDropHelper.IsDropTarget="True">
+                         dragdroputils:DragDropHelper.IsDropTarget="True"
+                         dragdroputils:DragDropHelper.EnableAutomaticScrolling="True">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding OpenCommand}"
@@ -143,12 +144,14 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                </ScrollViewer>
                 <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=DropImages}"
                            Foreground="{Binding Source={x:Static properties:Settings.Default}, Path=BackgroundTextColor}"
                            Visibility="{Binding IsDropListEmpty,Converter={StaticResource BoolToVisibilityConverter}}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Opacity="0.7" />
+               
             </Grid>
         </Border>
         <Grid Grid.Column="2"
