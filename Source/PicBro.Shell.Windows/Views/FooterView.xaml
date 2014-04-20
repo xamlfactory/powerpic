@@ -59,13 +59,14 @@
                         </Grid>
                     </DataTemplate>
                 </Grid.Resources>
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                 <ListBox AllowDrop="True"
                          ItemsSource="{Binding Images}"
                          Background="{Binding Source={x:Static properties:Settings.Default},Path=FooterBackground}"
                          x:Name="FooterImageListBox"
                          Drop="FooterImageListBox_Drop"
                          SelectedItem="{Binding SelectedImage,Mode=TwoWay}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          dragdroputils:DragDropHelper.DragDropTemplate="{StaticResource ImageModelDragTemplate}"
                          dragdroputils:DragDropHelper.IsInsertionAdornerVisible="True"
                          dragdroputils:DragDropHelper.DefaultDragDropEffect="Move"

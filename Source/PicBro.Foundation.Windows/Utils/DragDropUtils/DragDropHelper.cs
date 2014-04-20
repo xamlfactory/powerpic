@@ -178,11 +178,11 @@ namespace PicBro.Foundation.Windows.Utils.DragDropUtils
             DependencyProperty.RegisterAttached("EnableAutomaticScrolling", typeof(bool), typeof(DragDropHelper), new PropertyMetadata(false));
 
 
-       
 
 
 
-        #region EnableAutoScrollCode
+
+        #region EnableAutoScrollCode       
 
         private T GetParent<T>(DependencyObject obj) where T : UIElement
         {
@@ -358,7 +358,7 @@ namespace PicBro.Foundation.Windows.Utils.DragDropUtils
                     if (isAutoScroolEnabled && this.targetItemsControl != null)
                     {
                         if (this.parentScrollViewer == null)
-                            this.parentScrollViewer = GetParent<ScrollViewer>(targetItemsControl);
+                            this.parentScrollViewer = GetParent<ScrollViewer>(this.targetItemsControl);
                         if (this.parentScrollViewer != null)
                         {
                             if (parentScrollViewer != null)
@@ -384,17 +384,17 @@ namespace PicBro.Foundation.Windows.Utils.DragDropUtils
             if (scrollable != null)
             {
                 var mousePos = e.GetPosition(scrollable);
-                if (_scrollInfo.CanHorizontallyScroll)
+
+                if (_scrollInfo.CanVerticallyScroll)
                 {
-                    if (mousePos.X < 20)
+                    var avgHeight = scrollable.RenderSize.Height / _scrollInfo.ViewportHeight; //translate to pixels
+                    if (mousePos.Y < 20)
                     {
-
-                        _scrollInfo.LineLeft();
-
+                        _scrollInfo.LineUp();
                     }
-                    else if (mousePos.X >= (scrollable.RenderSize.Width -20))
+                    else if (mousePos.Y > (scrollable.RenderSize.Height - 20))
                     {
-                        _scrollInfo.LineRight();
+                        _scrollInfo.LineDown();
                     }
                 }
             }
@@ -452,7 +452,7 @@ namespace PicBro.Foundation.Windows.Utils.DragDropUtils
                 RemoveDraggedAdorner();
                 RemoveInsertionAdorner();
             }
-           
+
             e.Handled = true;
         }
 
