@@ -133,6 +133,8 @@
     <Compile Include="Events\ImageScanCompleted.cs" />
     <Compile Include="Events\ImagesSortedEvent.cs" />
     <Compile Include="Events\ListBoxSelectAllEvent.cs" />
+    <Compile Include="Events\MoveBackwardFolderEvent.cs" />
+    <Compile Include="Events\MoveForwardFolderEvent.cs" />
     <Compile Include="Events\OEMCommandEvent.cs" />
     <Compile Include="Events\ScanProgressChanged.cs" />
     <Compile Include="Events\ScanProgressChangedArgs.cs" />

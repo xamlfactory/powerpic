@@ -15,12 +15,15 @@ using PicBro.Foundation.Windows.Utils;
 using PicBro.Shell.Windows.Common;
 using PicBro.Shell.Windows.Events;
 using PicBro.Shell.Windows.Properties;
+using Microsoft.Practices.ServiceLocation;
+using System.Windows.Input;
 
 namespace PicBro.Shell.Windows.ViewModels
 {
     public sealed class ImageListViewModel : ViewModelBase
     {
         private readonly IDataServiceProxy dataService;
+        private readonly IEventAggregator eventAggregator;
         private DelegateCommand<object> openCommand;
         private DelegateCommand<object> addToFlimStripCommand;
         private DelegateCommand<object> dropCommand;
@@ -28,7 +31,7 @@ namespace PicBro.Shell.Windows.ViewModels
         private bool isSelectAll;
         private bool isFocusList;
         private int selectedIndex = -1;
-        private List<ImageModel> images;
+        private List<ImageModel> images;        
         private ImageModel selectedImage;
 
         public int ImageTileSize
@@ -74,15 +77,27 @@ namespace PicBro.Shell.Windows.ViewModels
             private set { this.loadedCommand = value; }
         }
 
+
+        private DelegateCommand<object> keyPressCommand;
+
+        public DelegateCommand<object> KeyPressCommand
+        {
+            get { return keyPressCommand; }
+            set { keyPressCommand = value; }
+        }
+
+
         public int SelectedIndex
         {
             get { return selectedIndex; }
             set
             {
-                this.selectedIndex = value;
+                this.selectedIndex = value;               
                 this.RaisePropertyChanged(() => this.SelectedIndex);
             }
         }
+
+       
 
         public DelegateCommand<object> AddToFlimStripCommand
         {
@@ -125,8 +140,10 @@ namespace PicBro.Shell.Windows.ViewModels
             : base(eventaggregator, navigationservice)
         {
             this.dataService = dataservice;
+            this.eventAggregator= eventaggregator;
             this.InitializeCommands();
             this.SubscribeEvents();
+          
         }
 
         private void InitializeCommands()
@@ -135,6 +152,32 @@ namespace PicBro.Shell.Windows.ViewModels
             this.DropCommand = new DelegateCommand<object>(this.OnDrop);
             this.LoadedCommand = new DelegateCommand<object>(this.OnLoadedCommandExecute);
             this.AddToFlimStripCommand = new DelegateCommand<object>(this.OnAddToFlimStripCommandExecute);
+            this.KeyPressCommand = new DelegateCommand<object>(this.HandleKeyPress);
+        }
+
+        private void HandleKeyPress(object obj)
+        {
+            var keyEventArgs = obj as KeyEventArgs;
+            if (keyEventArgs != null)
+            {
+                if (this.SelectedIndex == 0)
+                {
+                    if (keyEventArgs.Key == Key.Left)
+                    {
+                        this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Publish(null);                        
+                    }
+                }
+                else
+                {
+                    if (this.SelectedIndex == this.Images.Count - 1)
+                    {
+                        if (keyEventArgs.Key == Key.Right)
+                        {
+                            this.eventAggregator.GetEvent<MoveForwardFolderEvent>().Publish(null);  
+                        }                       
+                    }
+                }
+            }           
         }
 
         private void OnLoadedCommandExecute(object obj)

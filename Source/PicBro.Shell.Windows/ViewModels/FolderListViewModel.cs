@@ -231,15 +231,19 @@ namespace PicBro.Shell.Windows.ViewModels
             this.eventAggregator.GetEvent<FolderAddedEvent>().Subscribe(this.OnFolderAdded);
             this.eventAggregator.GetEvent<FolderRemovedEvent>().Subscribe(this.OnFolderRemoved);
             this.eventAggregator.GetEvent<ImageScanCompletedEvent>().Subscribe(this.OnImageScanCompleted);
-            this.eventAggregator.GetEvent<FolderExplorerSelectionEvent>().Subscribe(this.OnFolderExplorerSelctionRequestProcess);
-        }
+            this.eventAggregator.GetEvent<FolderExplorerSelectionEvent>().Subscribe(this.OnFolderExplorerSelctionRequestProcess);           
+            this.eventAggregator.GetEvent<MoveForwardFolderEvent>().Subscribe(this.MoveForwardFolder);
+            this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Subscribe(this.MoveBackwardFolder);
+        }        
 
         private void UnSubscribeEvents()
         {
             this.eventAggregator.GetEvent<FolderAddedEvent>().Unsubscribe(this.OnFolderAdded);
             this.eventAggregator.GetEvent<FolderRemovedEvent>().Unsubscribe(this.OnFolderRemoved);
             this.eventAggregator.GetEvent<ImageScanCompletedEvent>().Unsubscribe(this.OnImageScanCompleted);
-            this.eventAggregator.GetEvent<FolderExplorerSelectionEvent>().Unsubscribe(this.OnFolderExplorerSelctionRequestProcess);
+            this.eventAggregator.GetEvent<FolderExplorerSelectionEvent>().Unsubscribe(this.OnFolderExplorerSelctionRequestProcess);           
+            this.eventAggregator.GetEvent<MoveForwardFolderEvent>().Unsubscribe(this.MoveForwardFolder);
+            this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Unsubscribe(this.MoveBackwardFolder);
         }
 
         private void OnContextMenuOpenCommandExecuted(FolderModel param)
@@ -328,7 +332,33 @@ namespace PicBro.Shell.Windows.ViewModels
             await DeleteFolder();
 
         }
+       
+        private void MoveBackwardFolder(object obj)
+        {
+            int currentSelectedId = this.Folders.IndexOf(this.SelectedFolder);
 
+            if (currentSelectedId > 0)
+            {
+
+                this.SelectedFolder = this.Folders[currentSelectedId - 1];
+            }
+            else
+                this.SelectedFolder = this.Folders[this.Folders.Count-1];
+        }
+
+        private void MoveForwardFolder(object obj)
+        {
+            int currentSelectedId = this.Folders.IndexOf(this.SelectedFolder);
+            
+            if (currentSelectedId < this.Folders.Count - 1)
+            {
+                
+                this.SelectedFolder = this.Folders[currentSelectedId + 1];
+            }
+            else
+                this.SelectedFolder = this.Folders[0];
+            
+        }
         private async Task DeleteFolder()
         {
             MetroWindow window = (MetroWindow)App.Current.MainWindow;
