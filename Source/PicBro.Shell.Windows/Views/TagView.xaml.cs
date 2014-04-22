@@ -34,16 +34,11 @@ namespace PicBro.Shell.Windows.Views
 
         private void OnEscapeDown(object sender, KeyEventArgs e)
         {
-            FrameworkElement parent = (FrameworkElement)tagText.Parent;
-            while (parent != null && parent is IInputElement && !((IInputElement)parent).Focusable)
+            if (e.Key == Key.Escape)
             {
-                parent = (FrameworkElement)parent.Parent;
+                ((Shell)App.Current.MainWindow).mainRegion.Focus();
+                e.Handled = true;
             }
-
-            DependencyObject scope = FocusManager.GetFocusScope(tagText);
-            FocusManager.SetFocusedElement(scope, parent as IInputElement);
-
-            e.Handled = true;
         }
     }
 }

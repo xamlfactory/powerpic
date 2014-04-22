@@ -134,6 +134,7 @@
                           IsTabStop="False" />
             <ContentControl Grid.Column="2"
                             Grid.Row="1"
+                            x:Name="mainRegion"
                             prism:RegionManager.RegionName="{x:Static common:RegionNames.MainContentRegion}" />
             <ContentControl Grid.Row="1"
                             Grid.Column="3"
