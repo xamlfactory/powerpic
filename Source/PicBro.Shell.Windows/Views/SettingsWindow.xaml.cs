@@ -115,17 +115,6 @@ namespace PicBro.Shell.Windows.Views
                 }
             }
 
-            if (Properties.Settings.Default.Accent != accent || this.DBLocationPath.Text != dbpath)
-            {
-                MetroWindow window = (MetroWindow)App.Current.MainWindow;
-                var result = await window.ShowMessageAsync("Reset Powerpic", "Theme / DB Path changes need app restart. Do you really want to restart the app?", MessageDialogStyle.AffirmativeAndNegative);
-                if (result == MessageDialogResult.Affirmative)
-                {
-                    System.Diagnostics.Process.Start(App.ResourceAssembly.Location);
-                    App.Current.Shutdown();
-                }
-            }
-
             if (this.BackgroundList.SelectedItem.Equals("Light"))
             {
                 Properties.Settings.Default.MainBackground = Color.White.Name;
@@ -144,6 +133,18 @@ namespace PicBro.Shell.Windows.Views
             Properties.Settings.Default.Save();
             Properties.Settings.Default.Reload();
             this.Close();
+
+            if (Properties.Settings.Default.Accent != accent || this.DBLocationPath.Text != dbpath)
+            {
+                MetroWindow window = (MetroWindow)App.Current.MainWindow;
+                var result = await window.ShowMessageAsync("Reset Powerpic", "Theme / DB Path changes need app restart. Do you really want to restart the app?", MessageDialogStyle.AffirmativeAndNegative);
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    System.Diagnostics.Process.Start(App.ResourceAssembly.Location);
+                    App.Current.Shutdown();
+                }
+            }
+
         }
 
         private async void OnReset(object sender, RoutedEventArgs e)
