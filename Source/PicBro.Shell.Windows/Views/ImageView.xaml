@@ -101,6 +101,7 @@
                                 Command="{Binding AddToFlimStripCommand}" />
                 </Button.InputBindings>
             </Button>
+            <Button Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_Add}" Command="{Binding AddToFlimStripCommand}"/>
             <Button Content="à"
                     Padding="0"
                     FontSize="15"

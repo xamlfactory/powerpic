@@ -17,6 +17,7 @@ namespace PicBro.Shell.Windows.ViewModels
     using PicBro.Shell.Windows.Common;
     using PicBro.Shell.Windows.Views;
     using PicBro.Shell.Windows.Views.Export;
+    using System.Windows.Controls;
 
     public sealed class FooterViewModel : ViewModelBase
     {
@@ -36,6 +37,7 @@ namespace PicBro.Shell.Windows.ViewModels
         private DelegateCommand<object> exportCommand;
         private DelegateCommand<object> deleteCommand;
         private DelegateCommand<object> slideShowCommand;
+        private INavigationService navigationService;
 
         public DelegateCommand<object> OpenCommand
         {
@@ -165,7 +167,7 @@ namespace PicBro.Shell.Windows.ViewModels
             this.eMailService = emailservice;
             this.zipService = zipservice;
             this.dataService = dataservice;
-
+            this.navigationService = navigationservice;
             images = new ObservableCollection<ImageModel>();
             Images.CollectionChanged += Images_CollectionChanged;
             this.InitializeCommands();
@@ -323,6 +325,14 @@ namespace PicBro.Shell.Windows.ViewModels
                 {
                     Images.Add(item as ImageModel);
                 }
+                IRegionManager regionManager = ((NavigationService)navigationService).RegionManager;
+                UserControl view = (UserControl)regionManager.Regions[RegionNames.FooterRegion].ActiveViews.FirstOrDefault();
+                ListBox listBox = (ListBox)view.FindName("FooterImageListBox");
+                 if (listBox != null)
+                {
+                    listBox.ScrollIntoView(args.Images[args.Images.Count -1]);
+                }
+                     
             }
         }
 

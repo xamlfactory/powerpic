@@ -13,7 +13,7 @@
                       MinWidth="650"
                       MinHeight="450"
                       ShowTitleBar="False"
-                      UseNoneWindowStyle="True"
+                      UseNoneWindowStyle="False"
                       ShowMaxRestoreButton="True"
                       ShowCloseButton="True"
                       ShowMinButton="True"
