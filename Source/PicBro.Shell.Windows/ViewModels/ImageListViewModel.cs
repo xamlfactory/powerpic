@@ -33,6 +33,7 @@ namespace PicBro.Shell.Windows.ViewModels
         private int selectedIndex = -1;
         private List<ImageModel> images;        
         private ImageModel selectedImage;
+        private bool isLeftKeyPressed = false;
 
         public int ImageTileSize
         {
@@ -51,9 +52,30 @@ namespace PicBro.Shell.Windows.ViewModels
             }
             set
             {
-                this.images = value;
+                this.images = value;                
                 this.RaisePropertyChanged(() => this.Images);
+                this.HandleImagesChanged();
             }
+        }
+
+        private void HandleImagesChanged()
+        {
+            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (this.isLeftKeyPressed)
+                    {
+                        this.SelectedIndex = this.Images.Count - 1;
+                        isLeftKeyPressed = false;
+                        IRegionManager regionManager = ((NavigationService)navigationService).RegionManager;
+                        UserControl view = (UserControl)regionManager.Regions[RegionNames.MainContentRegion].ActiveViews.FirstOrDefault();
+                        ListBox listBox = (ListBox)view.FindName("list");
+                        ListBoxItem listboxItem = (ListBoxItem)listBox.ItemContainerGenerator.ContainerFromIndex(listBox.SelectedIndex);
+                        if (listboxItem != null)
+                        {
+                            listboxItem.Focus();
+                        }
+                    }
+                }), DispatcherPriority.ContextIdle, null);
         }
         public ImageModel SelectedImage
         {
@@ -164,7 +186,9 @@ namespace PicBro.Shell.Windows.ViewModels
                 {
                     if (keyEventArgs.Key == Key.Left)
                     {
-                        this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Publish(null);                        
+                        this.isLeftKeyPressed = true;
+                        this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Publish(null);   
+                        
                     }
                 }
                 else
