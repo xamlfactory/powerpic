@@ -255,4 +255,7 @@
   <data name="Menu_Type" xml:space="preserve">
     <value>Typ</value>
   </data>
+  <data name="Button_AddFlimStrip" xml:space="preserve">
+    <value>Um Flim Streifen hinzufügen</value>
+  </data>
 </root>

@@ -92,10 +92,10 @@
                         Padding="5 0"
                         Margin="5" />
             </StackPanel>
-            <Rectangle Width="38"
+            <Rectangle Width="30"
                        Fill="{DynamicResource AccentColorBrush}"
-                       Grid.Column="2" />
-            <Image Grid.Column="2"
+                       Grid.Column="2" Margin="4"  />
+            <Image Grid.Column="2" 
                    Width="25"
                    Stretch="Uniform"
                    Source="app.ico" />
@@ -155,30 +155,7 @@
         <Viewbox Stretch="Uniform"
                  Width="100"
                  VerticalAlignment="Top"
-                 HorizontalAlignment="Right">
-            <StackPanel Orientation="Horizontal">
-                <Button Content="0"
-                        Background="Transparent"
-                        x:Name="min"
-                        Click="MinimizeWindow"
-                        FontFamily="Webdings" />
-                <Button Content="1"
-                        Click="MaximizeWindow"
-                        Background="Transparent"
-                        x:Name="max"
-                        Visibility="Collapsed"
-                        FontFamily="Webdings" />
-                <Button Content="2"
-                        x:Name="res"
-                        Click="RestoreWindow"
-                        Background="Transparent"
-                        FontFamily="Webdings" />
-                <Button Content="r"
-                        x:Name="close"
-                        Click="CloseWindow"
-                        Background="Transparent"
-                        FontFamily="Webdings" />
-            </StackPanel>
+                 HorizontalAlignment="Right">          
         </Viewbox>
     </Grid>
 </Controls:MetroWindow>

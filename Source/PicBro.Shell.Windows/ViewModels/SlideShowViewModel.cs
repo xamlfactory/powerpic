@@ -15,8 +15,7 @@ namespace PicBro.Shell.Windows.ViewModels
     {
         private int index = -1;
         private string currentImage;
-        private Window slideShowWindow;
-        private DispatcherTimer timer;
+        private Window slideShowWindow;        
         public List<ImageModel> Images { get; set; }
         public string CurrentImage
         {
@@ -39,17 +38,7 @@ namespace PicBro.Shell.Windows.ViewModels
             this.Images = images;
             this.InitializeCommands();
             this.OnNextCommandExectue();
-        }
-
-        void timer_Tick(object sender, EventArgs e)
-        {
-            if (this.index >= this.Images.Count - 1)
-            {
-                this.index = -1;
-            }
-
-            this.OnNextCommandExectue();
-        }
+        }      
 
         private void InitializeCommands()
         {
@@ -62,17 +51,17 @@ namespace PicBro.Shell.Windows.ViewModels
         private void OnSlideShowCloseCommandExecute()
         {
             SessionService<string>.Remove(Constants.SlideShowWindow);
-            this.StopSlideShowTimerifPossible();
+           
         }
         private void OnPreviousCommandExecute()
         {
             if (this.index >= 1)
             {
-                this.StopSlideShowTimerifPossible();
+               
                 this.index--;
                 this.CurrentImage = this.Images[this.index].Path;
                 this.AnimateSlideImages(this.slideShowWindow);
-                this.StartSlideShowTimerIfPossible();
+                
             }
         }
 
@@ -80,11 +69,11 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             if (this.index < this.Images.Count - 1)
             {
-                this.StopSlideShowTimerifPossible();
+                
                 this.index++;
                 this.CurrentImage = this.Images[this.index].Path;
                 this.AnimateSlideImages(this.slideShowWindow);
-                this.StartSlideShowTimerIfPossible();
+                
             }
         }
 
@@ -109,25 +98,6 @@ namespace PicBro.Shell.Windows.ViewModels
             }
         }
 
-        private void StartSlideShowTimerIfPossible()
-        {
-            if (this.Images.Count > 1)
-            {
-                this.timer = new DispatcherTimer();
-                this.timer.Interval = new TimeSpan(0, 0, 4);
-                this.timer.Tick += timer_Tick;
-                this.timer.Start();
-            }
-        }
-
-        private void StopSlideShowTimerifPossible()
-        {
-            if (this.timer != null)
-            {
-                this.timer.Tick -= timer_Tick;
-                this.timer.Stop();
-            }
-        }
         public override bool IsNavigationTarget(Microsoft.Practices.Prism.Regions.NavigationContext navigationContext)
         {
             throw new System.NotImplementedException();

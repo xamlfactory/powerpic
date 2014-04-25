@@ -29,6 +29,12 @@
                     Command="{Binding PreviousCommand}" />
         <KeyBinding Key="Right"
                     Command="{Binding NextCommand}" />
+        <KeyBinding Key="Space"
+                    Command="{Binding NextCommand}" />
+        <MouseBinding MouseAction="LeftClick" 
+                      Command="{Binding NextCommand}" />
+        <MouseBinding MouseAction="RightClick" 
+                      Command="{Binding NextCommand}" />
     </Window.InputBindings>
     <Grid Background="Black">
         <Image Name="SlideShowImage"
