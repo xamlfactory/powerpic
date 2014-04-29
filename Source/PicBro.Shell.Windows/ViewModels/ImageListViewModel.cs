@@ -31,10 +31,9 @@ namespace PicBro.Shell.Windows.ViewModels
         private bool isSelectAll;
         private bool isFocusList;
         private int selectedIndex = -1;
-        private List<ImageModel> images;        
+        private List<ImageModel> images;
         private ImageModel selectedImage;
         private bool isLeftKeyPressed = false;
-
         public int ImageTileSize
         {
             get { return Properties.Settings.Default.ImageTileSize; }
@@ -52,7 +51,7 @@ namespace PicBro.Shell.Windows.ViewModels
             }
             set
             {
-                this.images = value;                
+                this.images = value;
                 this.RaisePropertyChanged(() => this.Images);
                 this.HandleImagesChanged();
             }
@@ -108,18 +107,26 @@ namespace PicBro.Shell.Windows.ViewModels
             set { keyPressCommand = value; }
         }
 
+        private DelegateCommand<object> addTagsCommand;
+
+        public DelegateCommand<object> AddTagsCommand
+        {
+            get { return addTagsCommand; }
+            set { addTagsCommand = value; }
+        }
+
 
         public int SelectedIndex
         {
             get { return selectedIndex; }
             set
             {
-                this.selectedIndex = value;               
+                this.selectedIndex = value;
                 this.RaisePropertyChanged(() => this.SelectedIndex);
             }
         }
 
-       
+
 
         public DelegateCommand<object> AddToFlimStripCommand
         {
@@ -162,10 +169,10 @@ namespace PicBro.Shell.Windows.ViewModels
             : base(eventaggregator, navigationservice)
         {
             this.dataService = dataservice;
-            this.eventAggregator= eventaggregator;
+            this.eventAggregator = eventaggregator;
             this.InitializeCommands();
             this.SubscribeEvents();
-          
+
         }
 
         private void InitializeCommands()
@@ -175,6 +182,12 @@ namespace PicBro.Shell.Windows.ViewModels
             this.LoadedCommand = new DelegateCommand<object>(this.OnLoadedCommandExecute);
             this.AddToFlimStripCommand = new DelegateCommand<object>(this.OnAddToFlimStripCommandExecute);
             this.KeyPressCommand = new DelegateCommand<object>(this.HandleKeyPress);
+            this.AddTagsCommand = new DelegateCommand<object>(this.OnAddTagsCommand);
+        }
+
+        private void OnAddTagsCommand(object obj)
+        {
+            new PicBro.Shell.Windows.Views.AddTagsWindow(this.eventAggregator, this.dataService, obj) { Owner = App.Current.MainWindow }.ShowDialog();
         }
 
         private void HandleKeyPress(object obj)
@@ -187,8 +200,8 @@ namespace PicBro.Shell.Windows.ViewModels
                     if (keyEventArgs.Key == Key.Left)
                     {
                         this.isLeftKeyPressed = true;
-                        this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Publish(null);   
-                        
+                        this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Publish(null);
+
                     }
                 }
                 else
@@ -197,11 +210,11 @@ namespace PicBro.Shell.Windows.ViewModels
                     {
                         if (keyEventArgs.Key == Key.Right)
                         {
-                            this.eventAggregator.GetEvent<MoveForwardFolderEvent>().Publish(null);  
-                        }                       
+                            this.eventAggregator.GetEvent<MoveForwardFolderEvent>().Publish(null);
+                        }
                     }
                 }
-            }           
+            }
         }
 
         private void OnLoadedCommandExecute(object obj)
@@ -344,6 +357,8 @@ namespace PicBro.Shell.Windows.ViewModels
             this.eventAggregator.GetEvent<ListBoxSelectAllEvent>().Subscribe(this.ListBoxSelectAll);
             this.eventAggregator.GetEvent<ThumbSizeChangedEvent>().Subscribe(this.OnThumbSizeChange);
         }
+
+
 
         private void UnSubscribeEvents()
         {

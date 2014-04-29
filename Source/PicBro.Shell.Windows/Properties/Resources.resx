@@ -258,4 +258,7 @@
   <data name="Button_AddFlimStrip" xml:space="preserve">
     <value>Add To Film Strip</value>
   </data>
+  <data name="Button_AddTags" xml:space="preserve">
+    <value>Add Tags</value>
+  </data>
 </root>

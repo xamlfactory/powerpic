@@ -75,6 +75,13 @@
                  SelectedIndex="{Binding SelectedIndex,Mode=TwoWay}"
                  SelectedItem="{Binding SelectedImage, Mode=TwoWay}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ContextMenu>               
+                    <ContextMenu>
+                        <ContextMenu.Items>
+                        <MenuItem Header="Add Tags" Command="{Binding AddTagsCommand}" CommandParameter="{Binding PlacementTarget.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
+                        </ContextMenu.Items>
+                    </ContextMenu>               
+            </ListBox.ContextMenu>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding OpenCommand}"
@@ -127,7 +134,7 @@
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
-                    </Setter>
+                    </Setter>                 
                 </Style>
             </ListBox.ItemContainerStyle>
             <ListBox.ItemsPanel>
@@ -141,7 +148,7 @@
                           Margin="10"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
-                          RenderOptions.BitmapScalingMode="HighQuality">
+                          RenderOptions.BitmapScalingMode="HighQuality">                        
                         <Grid>
                             <Border BorderThickness="4"
                                     BorderBrush="Transparent"
@@ -277,6 +284,16 @@
                     </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <ListBox.Style>
+                <Style TargetType="ListBox">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="ContextMenu" Value="{x:Null}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Style>
+           
         </ListBox>
     </Grid>
 </UserControl>

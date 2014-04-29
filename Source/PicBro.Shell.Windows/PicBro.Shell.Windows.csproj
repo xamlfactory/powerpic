@@ -166,6 +166,9 @@
     <Compile Include="Views\AddFolderView.xaml.cs">
       <DependentUpon>AddFolderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddTagsWindow.xaml.cs">
+      <DependentUpon>AddTagsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AppSplashScreen.xaml.cs">
       <DependentUpon>AppSplashScreen.xaml</DependentUpon>
     </Compile>
@@ -235,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddFolderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddTagsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
