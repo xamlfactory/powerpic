@@ -1,0 +1,19 @@
+﻿<Controls:MetroWindow x:Class="PicBro.Shell.Windows.Views.AddTagsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Add Tags" 
+        Height="200"
+        WindowStartupLocation="CenterOwner"  Width="300" ShowInTaskbar="False"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"  ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBox  Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" Grid.Row="0" Name="tagsTextBox" />
+        <Button Margin="0,0,0,10" Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_AddTags}" Height="30"  VerticalAlignment="Top" HorizontalAlignment="Center"  Grid.Row="1"  Click="Button_Click" />
+    </Grid>
+</Controls:MetroWindow>
