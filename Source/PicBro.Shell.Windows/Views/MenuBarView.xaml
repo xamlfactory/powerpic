@@ -52,6 +52,7 @@
             <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_File}">
                 <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_AddDirectory}"
                           Command="{Binding AddFolderCommand}" />
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_ManageTags}" Command="{Binding ManageTagsCommand}"/>
                 <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_RemoveFromDataBase}"
                           Command="{Binding RemoveFolderFromDBCommand}">
                     <MenuItem.Icon>

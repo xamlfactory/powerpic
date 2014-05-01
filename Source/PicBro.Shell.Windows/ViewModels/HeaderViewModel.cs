@@ -104,6 +104,15 @@ namespace PicBro.Shell.Windows.ViewModels
             private set { searchSettingsCommand = value; }
         }
 
+        private DelegateCommand manageTagsCommand;
+
+        public DelegateCommand ManageTagsCommand
+        {
+            get { return manageTagsCommand; }
+            set { manageTagsCommand = value; }
+        }
+
+
         public double Progress
         {
             get { return progress; }
@@ -177,6 +186,12 @@ namespace PicBro.Shell.Windows.ViewModels
             this.SearchSettingsCommand = new DelegateCommand(this.OnSearchSettingsExecute);
             this.SortCommand = new DelegateCommand<object>(this.OnSortCommandExecuted);
             this.LaunchTutorialCommand = new DelegateCommand(this.OnLauchTutorialCommandExecuted);
+            this.ManageTagsCommand = new DelegateCommand(this.OnManageTages);
+        }
+
+        private void OnManageTages()
+        {
+            new ManageTagsWindow(this.dataService) { Owner = App.Current.MainWindow }.ShowDialog(); 
         }
 
         private void OnLauchTutorialCommandExecuted()

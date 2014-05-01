@@ -439,6 +439,15 @@ namespace PicBro.Shell.Windows.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Tags.
+        /// </summary>
+        internal static string Menu_ManageTags {
+            get {
+                return ResourceManager.GetString("Menu_ManageTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string Menu_Name {

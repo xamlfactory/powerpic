@@ -199,6 +199,9 @@
     <Compile Include="Views\ImageListView.xaml.cs">
       <DependentUpon>ImageListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ManageTagsWindow.xaml.cs">
+      <DependentUpon>ManageTagsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MenuBarView.xaml.cs">
       <DependentUpon>MenuBarView.xaml</DependentUpon>
     </Compile>
@@ -282,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ImageListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManageTagsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

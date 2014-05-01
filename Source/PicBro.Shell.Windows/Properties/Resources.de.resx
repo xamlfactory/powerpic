@@ -258,4 +258,10 @@
   <data name="Button_AddFlimStrip" xml:space="preserve">
     <value>Um Flim Streifen hinzufügen</value>
   </data>
+  <data name="Button_AddTags" xml:space="preserve">
+    <value>Addieren Tags</value>
+  </data>
+  <data name="Menu_ManageTags" xml:space="preserve">
+    <value>Verwalten Tags</value>
+  </data>
 </root>

@@ -1,0 +1,22 @@
+﻿<Controls:MetroWindow x:Class="PicBro.Shell.Windows.Views.ManageTagsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Manage Tags" 
+        Height="400"
+        WindowStartupLocation="CenterOwner"  Width="400"  ShowInTaskbar="False"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"  ResizeMode="NoResize">
+    <Grid>
+        <ListView Name="tagList" ItemsSource="{Binding Tags}" KeyUp="tagList_KeyUp">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Tag" Width="300" DisplayMemberBinding="{Binding Tag}"/>
+                        <GridViewColumn Header="Images" Width="100" DisplayMemberBinding="{Binding Images}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Controls:MetroWindow>

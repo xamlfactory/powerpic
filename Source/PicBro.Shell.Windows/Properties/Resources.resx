@@ -261,4 +261,7 @@
   <data name="Button_AddTags" xml:space="preserve">
     <value>Add Tags</value>
   </data>
+  <data name="Menu_ManageTags" xml:space="preserve">
+    <value>Manage Tags</value>
+  </data>
 </root>
