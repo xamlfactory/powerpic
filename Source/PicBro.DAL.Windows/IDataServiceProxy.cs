@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using PicBro.DataModel.Windows;
+using System.Collections.ObjectModel;
 
 namespace PicBro.DAL.Windows
 {
@@ -43,6 +44,10 @@ namespace PicBro.DAL.Windows
         Task UpdateFavorite(int imageid, bool isfavorite);
 
         Task UpdatePopularity(int imageId);
+
+        Task<ObservableCollection<ManageTagsModel>> GetTags();
+
+        Task<bool> RemoveTag(string tag); 
 
         Task<bool> CleanupDataBase();
         Task UpdateFolderSortOrderAsync(IEnumerable<FolderModel> folders);

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PicBro.DataModel.Windows;
+using System.Collections.ObjectModel;
 
 namespace PicBro.DAL.Windows
 {
@@ -644,6 +645,27 @@ namespace PicBro.DAL.Windows
             return tagsEntries.ToString();
         }
 
+        public async Task<bool> RemoveTag(string tag)
+        {
+            Connection.Open();
+            try
+            {
+                string removeTags = "DELETE FROM Tags WHERE Name = @tag";
+                SQLiteCommand command = new SQLiteCommand(removeTags, Connection);             
+                command.Parameters.Add(new SQLiteParameter("@tag", tag));
+                await command.ExecuteNonQueryAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
         public async Task<bool> RemoveTagForImage(int imageId, string tag)
         {
             Connection.Open();
@@ -686,6 +708,47 @@ namespace PicBro.DAL.Windows
             {
                 Connection.Close();
             }
+        }
+
+
+        public async Task<ObservableCollection<ManageTagsModel>> GetTags()
+        {
+            ObservableCollection<ManageTagsModel> result = new ObservableCollection<ManageTagsModel>();
+            try
+            {
+                Connection.Open();
+                string sqlCommand = "SELECT DISTINCT Name FROM Tags";
+                SQLiteCommand cmd=new SQLiteCommand(sqlCommand, Connection);
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (reader.Read())
+                    {
+                        ManageTagsModel manageModel = new ManageTagsModel();
+                        manageModel.Tag = reader.GetString(0);
+                        string countCommand = "select COUNT(*) from Tags where Name=@name";
+                        SQLiteCommand countCmd = new SQLiteCommand(countCommand, Connection);
+                        countCmd.Parameters.Add(new SQLiteParameter("@name"  ,  manageModel.Tag ));
+                        using (DbDataReader countReader = await countCmd.ExecuteReaderAsync())
+                        {
+                            while (countReader.Read())
+                            {
+                                manageModel.Images = countReader.GetInt32(0);
+                            }
+                        }
+                        result.Add(manageModel);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return result;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            return result;
+            
         }
     }
 }
