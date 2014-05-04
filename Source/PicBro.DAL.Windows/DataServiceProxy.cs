@@ -750,5 +750,45 @@ namespace PicBro.DAL.Windows
             return result;
             
         }
+
+        public async Task<ObservableCollection<ManageTagsModel>> SearchTag(string tag)
+        {
+            ObservableCollection<ManageTagsModel> result = new ObservableCollection<ManageTagsModel>();
+            try
+            {
+                Connection.Open();                
+                string sqlCommand = @"SELECT  Name FROM Tags  WHERE Name LIKE '%"+tag+"%'";
+                SQLiteCommand cmd = new SQLiteCommand(sqlCommand, Connection);             
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (reader.Read())
+                    {
+                        ManageTagsModel manageModel = new ManageTagsModel();
+                        manageModel.Tag = reader.GetString(0);
+                        string countCommand = "select COUNT(*) from Tags where Name=@name";
+                        SQLiteCommand countCmd = new SQLiteCommand(countCommand, Connection);
+                        countCmd.Parameters.Add(new SQLiteParameter("@name", manageModel.Tag));
+                        using (DbDataReader countReader = await countCmd.ExecuteReaderAsync())
+                        {
+                            while (countReader.Read())
+                            {
+                                manageModel.Images = countReader.GetInt32(0);
+                            }
+                        }
+                        result.Add(manageModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return result;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            return result;
+            
+        }
     }
 }

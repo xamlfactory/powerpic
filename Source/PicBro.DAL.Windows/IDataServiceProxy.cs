@@ -47,7 +47,9 @@ namespace PicBro.DAL.Windows
 
         Task<ObservableCollection<ManageTagsModel>> GetTags();
 
-        Task<bool> RemoveTag(string tag); 
+        Task<bool> RemoveTag(string tag);
+
+        Task<ObservableCollection<ManageTagsModel>> SearchTag(string tag);
 
         Task<bool> CleanupDataBase();
         Task UpdateFolderSortOrderAsync(IEnumerable<FolderModel> folders);
