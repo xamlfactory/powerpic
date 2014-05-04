@@ -8,7 +8,45 @@
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"  ResizeMode="NoResize">
     <Grid>
-        <ListView Name="tagList" ItemsSource="{Binding Tags}" KeyUp="tagList_KeyUp">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0"
+                 VerticalAlignment="Center"
+                 FontSize="16"
+                 Height="30"
+                 Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Controls:TextboxHelper.Watermark="Search"
+                 Controls:TextboxHelper.ButtonCommand="{Binding ClearSearchCommand}"
+                 Controls:TextboxHelper.ClearTextButton="True"
+                 Margin="5">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter"
+                            Command="{Binding SearchCommand}" />
+            </TextBox.InputBindings>
+           
+        </TextBox>
+        <DataGrid Name="tags_grid" ItemsSource="{Binding Tags}" Grid.Row="1" KeyUp="tagList_KeyUp" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  Width="250" Header="Tag">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Tag}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn  Width="138" Header="Images">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Images}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<ListView Name="tagList" Grid.Row="1" ItemsSource="{Binding Tags}" KeyUp="tagList_KeyUp">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
@@ -17,6 +55,6 @@
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>-->
     </Grid>
 </Controls:MetroWindow>
