@@ -651,7 +651,7 @@ namespace PicBro.DAL.Windows
             try
             {
                 string removeTags = "DELETE FROM Tags WHERE Name = @tag";
-                SQLiteCommand command = new SQLiteCommand(removeTags, Connection);             
+                SQLiteCommand command = new SQLiteCommand(removeTags, Connection);
                 command.Parameters.Add(new SQLiteParameter("@tag", tag));
                 await command.ExecuteNonQueryAsync();
                 return true;
@@ -711,54 +711,14 @@ namespace PicBro.DAL.Windows
         }
 
 
-        public async Task<ObservableCollection<ManageTagsModel>> GetTags()
+        public async Task<ObservableCollection<ManageTagsModel>> GetTags(int start, int end)
         {
             ObservableCollection<ManageTagsModel> result = new ObservableCollection<ManageTagsModel>();
             try
             {
                 Connection.Open();
-                string sqlCommand = "SELECT DISTINCT Name FROM Tags";
-                SQLiteCommand cmd=new SQLiteCommand(sqlCommand, Connection);
-                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (reader.Read())
-                    {
-                        ManageTagsModel manageModel = new ManageTagsModel();
-                        manageModel.Tag = reader.GetString(0);
-                        string countCommand = "select COUNT(*) from Tags where Name=@name";
-                        SQLiteCommand countCmd = new SQLiteCommand(countCommand, Connection);
-                        countCmd.Parameters.Add(new SQLiteParameter("@name"  ,  manageModel.Tag ));
-                        using (DbDataReader countReader = await countCmd.ExecuteReaderAsync())
-                        {
-                            while (countReader.Read())
-                            {
-                                manageModel.Images = countReader.GetInt32(0);
-                            }
-                        }
-                        result.Add(manageModel);
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                return result;
-            }
-            finally
-            {
-                Connection.Close();
-            }
-            return result;
-            
-        }
-
-        public async Task<ObservableCollection<ManageTagsModel>> SearchTag(string tag)
-        {
-            ObservableCollection<ManageTagsModel> result = new ObservableCollection<ManageTagsModel>();
-            try
-            {
-                Connection.Open();                
-                string sqlCommand = @"SELECT  Name FROM Tags  WHERE Name LIKE '%"+tag+"%'";
-                SQLiteCommand cmd = new SQLiteCommand(sqlCommand, Connection);             
+                string sqlCommand = "SELECT DISTINCT Name FROM Tags LIMIT " + start.ToString() + ", " + end.ToString();
+                SQLiteCommand cmd = new SQLiteCommand(sqlCommand, Connection);
                 using (DbDataReader reader = await cmd.ExecuteReaderAsync())
                 {
                     while (reader.Read())
@@ -788,7 +748,47 @@ namespace PicBro.DAL.Windows
                 Connection.Close();
             }
             return result;
-            
+
+        }
+
+        public async Task<ObservableCollection<ManageTagsModel>> SearchTag(string tag)
+        {
+            ObservableCollection<ManageTagsModel> result = new ObservableCollection<ManageTagsModel>();
+            try
+            {
+                Connection.Open();
+                string sqlCommand = @"SELECT  Name FROM Tags  WHERE Name LIKE '" + tag + "%'";
+                SQLiteCommand cmd = new SQLiteCommand(sqlCommand, Connection);
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (reader.Read())
+                    {
+                        ManageTagsModel manageModel = new ManageTagsModel();
+                        manageModel.Tag = reader.GetString(0);
+                        string countCommand = "select COUNT(*) from Tags where Name=@name";
+                        SQLiteCommand countCmd = new SQLiteCommand(countCommand, Connection);
+                        countCmd.Parameters.Add(new SQLiteParameter("@name", manageModel.Tag));
+                        using (DbDataReader countReader = await countCmd.ExecuteReaderAsync())
+                        {
+                            while (countReader.Read())
+                            {
+                                manageModel.Images = countReader.GetInt32(0);
+                            }
+                        }
+                        result.Add(manageModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return result;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            return result;
+
         }
     }
 }

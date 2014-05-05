@@ -45,7 +45,7 @@ namespace PicBro.DAL.Windows
 
         Task UpdatePopularity(int imageId);
 
-        Task<ObservableCollection<ManageTagsModel>> GetTags();
+        Task<ObservableCollection<ManageTagsModel>> GetTags(int start, int end);
 
         Task<bool> RemoveTag(string tag);
 

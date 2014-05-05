@@ -155,6 +155,7 @@
     <Compile Include="ViewModels\ImageViewModel.cs" />
     <Compile Include="ViewModels\ImageHeaderViewModel.cs" />
     <Compile Include="ViewModels\ImageListViewModel.cs" />
+    <Compile Include="ViewModels\ManageTagsViewModel.cs" />
     <Compile Include="ViewModels\MenuBarViewModel.cs" />
     <Compile Include="ViewModels\SearchDetailViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
