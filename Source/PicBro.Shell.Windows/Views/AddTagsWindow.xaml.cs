@@ -38,6 +38,7 @@ namespace PicBro.Shell.Windows.Views
             InitializeComponent();
             this.selectedImages = selectedImages as IEnumerable;
             this.dataService = dataservice;
+            this.tagsTextBox.Focus();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -51,7 +52,10 @@ namespace PicBro.Shell.Windows.Views
                     {
                         if (selectediamge != null)
                         {
-                            this.dataService.InsertTag(tags[i], selectediamge.ID);
+                            if (! string.IsNullOrEmpty(tags[i]))
+                            {
+                                this.dataService.InsertTag(tags[i].Trim(), selectediamge.ID);
+                            }
                         }
                     }
                 }

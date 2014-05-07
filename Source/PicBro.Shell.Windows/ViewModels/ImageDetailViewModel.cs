@@ -235,9 +235,13 @@ namespace PicBro.Shell.Windows.ViewModels
             {
                 if (this.Image != null)
                 {
-                    this.Image.Tags.Clear(); 
-                    this.RaisePropertyChanged(() => this.IsTagsAvailable);
-                    await this.dataService.RemoveAllTags(this.Image.ID);
+                    var result= MessageBox.Show("Are you sure you want to delete all tags?", "Delete Tags", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        this.Image.Tags.Clear();
+                        this.RaisePropertyChanged(() => this.IsTagsAvailable);
+                        await this.dataService.RemoveAllTags(this.Image.ID);
+                    }
                 }
             }
             catch
