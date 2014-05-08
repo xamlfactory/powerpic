@@ -36,6 +36,8 @@ namespace PicBro.Shell.Windows.ViewModels
         private DelegateCommand launchTutorialCommand;
         private DelegateCommand<object> sortCommand;
         private readonly IDataServiceProxy dataService;
+        private Window manageWindow;
+
 
         public DelegateCommand LaunchTutorialCommand
         {
@@ -174,6 +176,7 @@ namespace PicBro.Shell.Windows.ViewModels
             this.dataService = dataservice;
             this.SearchText = string.Empty;
             this.InitializeCommands();
+            this.SubscribeEvents();
         }
 
         private void InitializeCommands()
@@ -191,7 +194,8 @@ namespace PicBro.Shell.Windows.ViewModels
 
         private void OnManageTages()
         {
-            new ManageTagsWindow(this.dataService) { Owner = App.Current.MainWindow }.ShowDialog(); 
+            this.manageWindow = new ManageTagsWindow(this.dataService, this.threadService, this.eventAggregator, this.navigationService) { Owner = App.Current.MainWindow };
+            this.manageWindow.ShowDialog();
         }
 
         private void OnLauchTutorialCommandExecuted()
@@ -457,10 +461,29 @@ namespace PicBro.Shell.Windows.ViewModels
 
         public override void OnNavigatedFrom(Microsoft.Practices.Prism.Regions.NavigationContext navigationContext)
         {
+            this.UnubscribeEvents();
         }
 
         public override void OnNavigatedTo(Microsoft.Practices.Prism.Regions.NavigationContext navigationContext)
         {
+            this.SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            this.eventAggregator.GetEvent<CloseWindowEvent>().Subscribe(this.OnCloseWindow);
+        }
+        private void UnubscribeEvents()
+        {
+            this.eventAggregator.GetEvent<CloseWindowEvent>().Unsubscribe(this.OnCloseWindow);
+        }
+
+        private void OnCloseWindow(object obj)
+        {
+            if (this.manageWindow != null)
+            {
+                this.manageWindow.Close();
+            }
         }
     }
 }

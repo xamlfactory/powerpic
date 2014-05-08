@@ -10,6 +10,10 @@ using PicBro.DAL.Windows;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows;
+using PicBro.Foundation.Windows.Infrastructure;
+using Microsoft.Practices.Prism.Events;
+using PicBro.Shell.Windows.Common;
+using PicBro.Shell.Windows.Events;
 
 namespace PicBro.Shell.Windows.ViewModels
 {
@@ -18,6 +22,9 @@ namespace PicBro.Shell.Windows.ViewModels
         private int max = 10;
 
         private readonly IDataServiceProxy dataService;
+        private readonly IEventAggregator eventAggregator;
+        private readonly INavigationService navigationService;
+        private readonly IThreadService threadService;
 
         private ObservableCollection<ManageTagsModel> tags;
 
@@ -44,6 +51,56 @@ namespace PicBro.Shell.Windows.ViewModels
             set { searchText = value; RaisePropertyChanged("SearchText"); }
         }
 
+        public DelegateCommand TagSearchCommand
+        {
+            get
+            {
+                return new DelegateCommand(this.OnTagSearch);
+            }
+        }
+
+
+        public DelegateCommand CloseCommand
+        {
+            get
+            {
+                return new DelegateCommand(this.OnCloseCommand); 
+            }
+        }
+
+        private void OnCloseCommand()
+        {
+            this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
+        }
+
+        private void OnTagSearch()
+        {
+            if (this.SelectedTag != null)
+            {
+                var messageBoxResult = MessageBox.Show("Do you want to view all images with the tag " + this.SelectedTag.Tag.Trim() + "?", "Show Images", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    if (!string.IsNullOrEmpty(this.SelectedTag.Tag.Trim()))
+                    {
+                        this.threadService.DoBackgroundWork(async (o, e) =>
+                        {
+                            e.Result = await this.dataService.GetAllImages(this.SelectedTag.Tag.Trim(), Properties.Settings.Default.IsTagSearchEnabled, Properties.Settings.Default.IsDescriptionSearchEnabled, Properties.Settings.Default.IsFavoritesOnly);
+                        },
+                        (o, e) =>
+                        {
+                            SessionService<string>.Save(Constants.ReloadSelectedFolderContent, true);
+                            this.navigationService.NavigateTo(RegionNames.MenuBarRegion, ViewNames.ImageHeaderView);
+                            this.navigationService.NavigateTo(RegionNames.NavigationRegion, ViewNames.SearchDetailView);
+                            List<ImageModel> list = e.Result as List<ImageModel>;
+                            this.eventAggregator.GetEvent<SearchEvent>().Publish(list);
+                        });
+                    }
+                    this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
+                }
+            }
+        }
+
+
         public DelegateCommand DeleteCommand
         {
             get
@@ -52,15 +109,18 @@ namespace PicBro.Shell.Windows.ViewModels
             }
         }
 
-        public ManageTagsViewModel(IDataServiceProxy dataservice)
+        public ManageTagsViewModel(IDataServiceProxy dataservice, IThreadService threadservice, IEventAggregator eventaggregator, INavigationService navigationservice)
         {
             this.dataService = dataservice;
+            this.navigationService = navigationservice;
+            this.threadService = threadservice;
+            this.eventAggregator = eventaggregator;
             this.PropertyChanged += ManageTagsViewModel_PropertyChanged;
         }
 
         async void ManageTagsViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "SearchText")
+            if (e.PropertyName == "SearchText")
             {
                 if (!String.IsNullOrEmpty(SearchText))
                 {
@@ -94,7 +154,7 @@ namespace PicBro.Shell.Windows.ViewModels
 
         public override void OnNavigatedFrom(Microsoft.Practices.Prism.Regions.NavigationContext navigationContext)
         {
-            
+
         }
 
         public override async void OnNavigatedTo(Microsoft.Practices.Prism.Regions.NavigationContext navigationContext)
@@ -118,5 +178,7 @@ namespace PicBro.Shell.Windows.ViewModels
                 this.Tags.Add(tag);
             }
         }
+
+      
     }
 }

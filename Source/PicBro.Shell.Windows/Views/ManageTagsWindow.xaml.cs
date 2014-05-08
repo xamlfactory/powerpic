@@ -1,7 +1,9 @@
 ﻿using MahApps.Metro.Controls;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using PicBro.DAL.Windows;
 using PicBro.DataModel.Windows;
+using PicBro.Foundation.Windows.Infrastructure;
 using PicBro.Shell.Windows.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,10 +27,12 @@ namespace PicBro.Shell.Windows.Views
     /// </summary>
     public partial class ManageTagsWindow : MetroWindow
     {
-        public ManageTagsWindow(IDataServiceProxy dataService)
+        IThreadService threadService;
+
+        public ManageTagsWindow(IDataServiceProxy dataService, IThreadService threadservice, IEventAggregator eventAggregator,INavigationService navigationService)
         {
             InitializeComponent();
-            this.DataContext = new ManageTagsViewModel(dataService);
+            this.DataContext = new ManageTagsViewModel(dataService,threadservice,eventAggregator,navigationService);
             this.Loaded += ManageTagsWindow_Loaded;
         }
 
@@ -63,5 +67,6 @@ namespace PicBro.Shell.Windows.Views
             }
             return null;
         }
+        
     }
 }
