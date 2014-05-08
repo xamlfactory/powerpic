@@ -757,7 +757,7 @@ namespace PicBro.DAL.Windows
             try
             {
                 Connection.Open();
-                string sqlCommand = @"SELECT  Name FROM Tags  WHERE Name LIKE '" + tag + "%'";
+                string sqlCommand = @"SELECT DISTINCT Name FROM Tags  WHERE Name LIKE '" + tag + "%'";
                 SQLiteCommand cmd = new SQLiteCommand(sqlCommand, Connection);
                 using (DbDataReader reader = await cmd.ExecuteReaderAsync())
                 {
