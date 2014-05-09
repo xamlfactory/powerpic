@@ -129,6 +129,7 @@
     <Compile Include="Events\FolderDroppedEventArgs.cs" />
     <Compile Include="Events\FolderExplorerSelectionEvent.cs" />
     <Compile Include="Events\FolderRemovedEvent.cs" />
+    <Compile Include="Events\ImageChangedEvent.cs" />
     <Compile Include="Events\ImageFullViewNavigatedEvent.cs" />
     <Compile Include="Events\ImageFullViewNavigatedEventArgs.cs" />
     <Compile Include="Events\ImageScanCompleted.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="ViewModels\SearchDetailViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SlideShowViewModel.cs" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\About\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>

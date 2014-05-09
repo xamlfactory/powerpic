@@ -26,7 +26,7 @@ namespace PicBro.Shell.Windows.Views
             InitializeComponent();
         }
 
-        public TagView(ImageDetailViewModel viewmodel)
+        public TagView(TagViewModel viewmodel)
             : this()
         {
             this.DataContext = viewmodel;

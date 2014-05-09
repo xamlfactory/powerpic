@@ -337,7 +337,7 @@ namespace PicBro.Shell.Windows.ViewModels
                 if (!Settings.Default.ShowTagsOnLeft)
                 {
                     this.navigationService.NavigateTo(RegionNames.RightNavigationRegion, ViewNames.TagView);
-                }
+                }              
                 this.eventAggregator.GetEvent<ImageFullViewNavigatedEvent>().Publish(new ImageFullViewNavigatedEventArgs() { ImageList = Images });
             }
         }

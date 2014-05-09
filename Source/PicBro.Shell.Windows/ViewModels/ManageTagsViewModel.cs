@@ -91,6 +91,7 @@ namespace PicBro.Shell.Windows.ViewModels
                             SessionService<string>.Save(Constants.ReloadSelectedFolderContent, true);
                             this.navigationService.NavigateTo(RegionNames.MenuBarRegion, ViewNames.ImageHeaderView);
                             this.navigationService.NavigateTo(RegionNames.NavigationRegion, ViewNames.SearchDetailView);
+                            this.navigationService.NavigateTo(RegionNames.MainContentRegion, ViewNames.ImageListView);
                             List<ImageModel> list = e.Result as List<ImageModel>;
                             this.eventAggregator.GetEvent<SearchEvent>().Publish(list);
                         });
