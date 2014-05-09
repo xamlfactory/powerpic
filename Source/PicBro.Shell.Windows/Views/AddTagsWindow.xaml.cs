@@ -31,9 +31,9 @@ namespace PicBro.Shell.Windows.Views
         {
             InitializeComponent();
         }
-       
 
-        public AddTagsWindow(IEventAggregator eventagregator,IDataServiceProxy dataservice,object selectedImages)
+
+        public AddTagsWindow(IEventAggregator eventagregator, IDataServiceProxy dataservice, object selectedImages)
         {
             InitializeComponent();
             this.selectedImages = selectedImages as IEnumerable;
@@ -45,16 +45,21 @@ namespace PicBro.Shell.Windows.Views
         {
             if (this.selectedImages != null && this.dataService != null)
             {
-                string[] tags = this.tagsTextBox.Text.Split(',');
+                var tagsStr = this.tagsTextBox.Text.Replace('\n', ',');
+                string[] tags = tagsStr.Split(',');
                 for (int i = 0; i < tags.Length; i++)
                 {
                     foreach (ImageModel selectediamge in selectedImages)
                     {
                         if (selectediamge != null)
                         {
-                            if (! string.IsNullOrEmpty(tags[i]))
+                            if (!string.IsNullOrEmpty(tags[i]))
                             {
-                                this.dataService.InsertTag(tags[i].Trim(), selectediamge.ID);
+                                var tag = this.dataService.GetTagsForImage(selectediamge.ID).Result;
+                                if (!tag.Contains(tags[i].Trim()))
+                                {
+                                    this.dataService.InsertTag(tags[i].Trim(), selectediamge.ID);
+                                }
                             }
                         }
                     }
