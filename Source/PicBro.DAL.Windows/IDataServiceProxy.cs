@@ -45,11 +45,11 @@ namespace PicBro.DAL.Windows
 
         Task UpdatePopularity(int imageId);
 
-        Task<ObservableCollection<ManageTagsModel>> GetTags(int start, int end);
+        Task<ObservableCollection<ManageTagsModel>> GetTags(int start, int end,int option,string sortColumn);
 
         Task<bool> RemoveTag(string tag);
 
-        Task<ObservableCollection<ManageTagsModel>> SearchTag(string tag);
+        Task<ObservableCollection<ManageTagsModel>> SearchTag(string tag, int start, int end, int option, string sortColumn);
 
         Task<bool> CleanupDataBase();
         Task UpdateFolderSortOrderAsync(IEnumerable<FolderModel> folders);

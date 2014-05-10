@@ -711,13 +711,13 @@ namespace PicBro.DAL.Windows
         }
 
 
-        public async Task<ObservableCollection<ManageTagsModel>> GetTags(int start, int end)
+        public async Task<ObservableCollection<ManageTagsModel>> GetTags(int start, int end, int sortOption, string sortColumn)
         {
             ObservableCollection<ManageTagsModel> result = new ObservableCollection<ManageTagsModel>();
             try
             {
                 Connection.Open();
-                string sqlCommand = "SELECT DISTINCT Name FROM Tags LIMIT " + start.ToString() + ", " + end.ToString();
+                string sqlCommand = "SELECT DISTINCT Name FROM Tags";
                 SQLiteCommand cmd = new SQLiteCommand(sqlCommand, Connection);
                 using (DbDataReader reader = await cmd.ExecuteReaderAsync())
                 {
@@ -747,11 +747,43 @@ namespace PicBro.DAL.Windows
             {
                 Connection.Close();
             }
+            result = OrderResult(start, end, sortOption, sortColumn, result);
             return result;
 
         }
 
-        public async Task<ObservableCollection<ManageTagsModel>> SearchTag(string tag)
+        private static ObservableCollection<ManageTagsModel> OrderResult(int start, int end, int sortOption, string sortColumn, ObservableCollection<ManageTagsModel> result)
+        {
+            if (sortOption == 1)
+            {
+                if (sortColumn == "images")
+                {
+                    result = new ObservableCollection<ManageTagsModel>(result.OrderBy(tag => tag.Images).AsEnumerable());
+                }
+                else
+                {
+                    result = new ObservableCollection<ManageTagsModel>(result.OrderBy(tag => tag.Tag).AsEnumerable());
+
+                }
+            }
+            else
+            {
+                if (sortColumn == "images")
+                {
+                    result = new ObservableCollection<ManageTagsModel>(result.OrderByDescending(tag => tag.Images).AsEnumerable());
+                }
+                else
+                {
+                    result = new ObservableCollection<ManageTagsModel>(result.OrderByDescending(tag => tag.Tag).AsEnumerable());
+
+                }
+            }
+            result = new ObservableCollection<ManageTagsModel>(result.Where(tag => result.IndexOf(tag) >= start && result.IndexOf(tag) <= (start + end)));
+
+            return result;
+        }
+
+        public async Task<ObservableCollection<ManageTagsModel>> SearchTag(string tag, int start, int end, int option, string sortColumn)
         {
             ObservableCollection<ManageTagsModel> result = new ObservableCollection<ManageTagsModel>();
             try
@@ -787,8 +819,8 @@ namespace PicBro.DAL.Windows
             {
                 Connection.Close();
             }
+            result = OrderResult(start, end, option, sortColumn, result);
             return result;
-
         }
     }
 }
