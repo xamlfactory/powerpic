@@ -2,11 +2,12 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                      xmlns:cmds="clr-namespace:PicBro.Shell.Windows.Common"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="Manage Tags"
                       Height="300"
                       SizeToContent="Width"
-                      WindowStartupLocation="CenterOwner"
+                      WindowStartupLocation="CenterOwner"                       
                       ShowInTaskbar="False"
                       BorderBrush="{DynamicResource AccentColorBrush}"
                       BorderThickness="1"
@@ -47,7 +48,7 @@
                   SelectionMode="Single"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTemplateColumn  Width="250"
+                <DataGridTemplateColumn  Width="250" 
                                          SortMemberPath="Tag"
                                          Header="Tag">
                     <DataGridTemplateColumn.CellTemplate>
@@ -69,6 +70,10 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding TagSearchCommand}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="Sorting">
+                    <cmds:EventCommand Command="{Binding SortCommand}"
+                               CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DataGrid>

@@ -39,9 +39,10 @@ namespace PicBro.Shell.Windows.Views
         void ManageTagsWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var scroll = GetScrollbar(tags_grid);
-            scroll.ScrollChanged += scroll_ScrollChanged;
+            scroll.ScrollChanged += scroll_ScrollChanged;            
             ((ManageTagsViewModel)this.DataContext).OnNavigatedTo(null);
         }
+      
 
         void scroll_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {

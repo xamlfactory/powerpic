@@ -14,12 +14,17 @@ using PicBro.Foundation.Windows.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using PicBro.Shell.Windows.Common;
 using PicBro.Shell.Windows.Events;
+using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace PicBro.Shell.Windows.ViewModels
 {
     public class ManageTagsViewModel : ViewModelBase
     {
         private int max = 10;
+        private int sortOption = 0;
+        private bool isFiltered = false;
+        private string sortColumn = "images";
 
         private readonly IDataServiceProxy dataService;
         private readonly IEventAggregator eventAggregator;
@@ -64,10 +69,41 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             get
             {
-                return new DelegateCommand(this.OnCloseCommand); 
+                return new DelegateCommand(this.OnCloseCommand);
             }
         }
 
+        public DelegateCommand<object> SortCommand
+        {
+            get
+            {
+                return new DelegateCommand<Object>(this.OnSorting);
+            }
+        }
+
+        private void OnSorting(object obj)
+        {
+            var e = obj as DataGridSortingEventArgs;
+            if (e != null)
+            {
+                this.Tags.Clear();
+                ObservableCollection<ManageTagsModel> tagsModel;
+                sortColumn = e.Column.SortMemberPath.ToLower();
+                if (e.Column.SortDirection == null || e.Column.SortDirection == ListSortDirection.Descending)
+                {
+                    sortOption = 1;
+                }
+                else
+                {
+                    sortOption = 0;
+                }
+                tagsModel = isFiltered ? this.dataService.SearchTag(this.SearchText, this.tags.Count, max, sortOption, sortColumn).Result : this.dataService.GetTags(this.Tags.Count, max, sortOption, sortColumn).Result;
+                foreach (var item in tagsModel)
+                {
+                    this.Tags.Add(item);
+                }
+            }
+        }
         private void OnCloseCommand()
         {
             this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
@@ -125,11 +161,13 @@ namespace PicBro.Shell.Windows.ViewModels
             {
                 if (!String.IsNullOrEmpty(SearchText))
                 {
-                    var tags = this.dataService.SearchTag(this.SearchText);
+                    this.isFiltered = true;
+                    var tags = this.dataService.SearchTag(this.SearchText, 0, max, this.sortOption, sortColumn);
                     this.Tags = new ObservableCollection<ManageTagsModel>(tags.Result.OrderByDescending(tag => tag.Images));
                 }
                 else
                 {
+                    this.isFiltered = false;
                     await InitializeTags();
                 }
             }
@@ -166,20 +204,29 @@ namespace PicBro.Shell.Windows.ViewModels
         private async Task InitializeTags()
         {
             this.Tags = new ObservableCollection<ManageTagsModel>();
-            var tags = await this.dataService.GetTags(this.Tags.Count, max);
-            this.Tags = new ObservableCollection<ManageTagsModel>(tags.OrderByDescending(tag => tag.Images));
+            var tags = await this.dataService.GetTags(this.Tags.Count, max, sortOption, sortColumn);
+            this.Tags = tags;
         }
 
 
         internal async void RequestTags()
         {
-            var tags = await this.dataService.GetTags(this.Tags.Count, max);
+            ObservableCollection<ManageTagsModel> tags;
+            if (isFiltered)
+            {
+                tags = await this.dataService.SearchTag(this.SearchText, this.Tags.Count, max, sortOption, sortColumn);
+            }
+            else
+            {
+                tags = await this.dataService.GetTags(this.Tags.Count, max, sortOption, sortColumn);
+            }
+
             foreach (var tag in tags)
             {
                 this.Tags.Add(tag);
             }
         }
 
-      
+
     }
 }

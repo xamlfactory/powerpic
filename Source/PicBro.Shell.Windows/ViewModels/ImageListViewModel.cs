@@ -68,11 +68,12 @@ namespace PicBro.Shell.Windows.ViewModels
                         IRegionManager regionManager = ((NavigationService)navigationService).RegionManager;
                         UserControl view = (UserControl)regionManager.Regions[RegionNames.MainContentRegion].ActiveViews.FirstOrDefault();
                         ListBox listBox = (ListBox)view.FindName("list");
-                        ListBoxItem listboxItem = (ListBoxItem)listBox.ItemContainerGenerator.ContainerFromIndex(listBox.SelectedIndex);
+                        ListBoxItem listboxItem = (ListBoxItem)listBox.ItemContainerGenerator.ContainerFromIndex(this.SelectedIndex);
                         if (listboxItem != null)
                         {
-                            listboxItem.Focus();
-                        }
+                           listboxItem.Focus();
+                        }                       
+                        
                     }
                 }), DispatcherPriority.ContextIdle, null);
         }
@@ -200,8 +201,7 @@ namespace PicBro.Shell.Windows.ViewModels
                     if (keyEventArgs.Key == Key.Left)
                     {
                         this.isLeftKeyPressed = true;
-                        this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Publish(null);
-
+                        this.eventAggregator.GetEvent<MoveBackwardFolderEvent>().Publish(null);                       
                     }
                 }
                 else
@@ -211,6 +211,7 @@ namespace PicBro.Shell.Windows.ViewModels
                         if (keyEventArgs.Key == Key.Right)
                         {
                             this.eventAggregator.GetEvent<MoveForwardFolderEvent>().Publish(null);
+                           
                         }
                     }
                 }

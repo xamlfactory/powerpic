@@ -103,6 +103,10 @@
                 <KeyBinding Key="Space"
                             Command="{Binding OpenCommand}"
                             CommandParameter="{Binding Path=SelectedItem,ElementName=list}" />
+                <KeyBinding Key="A"
+                            Modifiers="Shift"
+                            Command="{Binding AddTagsCommand}"
+                            />
             </ListBox.InputBindings>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem"
