@@ -17,6 +17,7 @@ using PicBro.Shell.Windows.Events;
 using PicBro.Shell.Windows.Properties;
 using Microsoft.Practices.ServiceLocation;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace PicBro.Shell.Windows.ViewModels
 {
@@ -69,6 +70,13 @@ namespace PicBro.Shell.Windows.ViewModels
                         UserControl view = (UserControl)regionManager.Regions[RegionNames.MainContentRegion].ActiveViews.FirstOrDefault();
                         ListBox listBox = (ListBox)view.FindName("list");
                         ListBoxItem listboxItem = (ListBoxItem)listBox.ItemContainerGenerator.ContainerFromIndex(this.SelectedIndex);
+                        if (listboxItem == null)
+                        {
+                            var scrollViewer=GetDescendantByType(listBox,typeof(ScrollViewer)) as ScrollViewer;
+                            scrollViewer.ScrollToBottom();
+                            listBox.UpdateLayout();
+                            listboxItem = (ListBoxItem)listBox.ItemContainerGenerator.ContainerFromIndex(this.SelectedIndex);
+                        }
                         if (listboxItem != null)
                         {
                            listboxItem.Focus();
@@ -77,6 +85,7 @@ namespace PicBro.Shell.Windows.ViewModels
                     }
                 }), DispatcherPriority.ContextIdle, null);
         }
+     
         public ImageModel SelectedImage
         {
             get { return selectedImage; }
@@ -385,6 +394,33 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             this.navigationService.ClearViews(RegionNames.RightNavigationRegion);
             this.SubscribeEvents();
+        }
+
+        private static Visual GetDescendantByType(Visual element, Type type)
+        {
+            if (element == null)
+            {
+                return null;
+            }
+            if (element.GetType() == type)
+            {
+                return element;
+            }
+            Visual foundElement = null;
+            if (element is FrameworkElement)
+            {
+                (element as FrameworkElement).ApplyTemplate();
+            }
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            {
+                Visual visual = VisualTreeHelper.GetChild(element, i) as Visual;
+                foundElement = GetDescendantByType(visual, type);
+                if (foundElement != null)
+                {
+                    break;
+                }
+            }
+            return foundElement;
         }
     }
 }
