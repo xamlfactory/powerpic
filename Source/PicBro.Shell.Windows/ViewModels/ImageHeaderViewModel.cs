@@ -71,6 +71,7 @@ namespace PicBro.Shell.Windows.ViewModels
 
         private void OnBack()
         {
+           
             this.navigationService.NavigateTo(RegionNames.NavigationRegion, ViewNames.FolderListView);
             this.navigationService.NavigateTo(RegionNames.MenuBarRegion, ViewNames.MenuBarView);
             this.navigationService.NavigateTo(RegionNames.MainContentRegion, ViewNames.ImageListView);

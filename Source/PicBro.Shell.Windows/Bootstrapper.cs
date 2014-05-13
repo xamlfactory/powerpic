@@ -44,6 +44,7 @@ namespace PicBro.Shell.Windows
             region.RegisterViewWithRegion(RegionNames.NavigationRegion, typeof(ImageDetailView));
             region.RegisterViewWithRegion(RegionNames.MenuBarRegion, typeof(ImageHeaderView));
             region.RegisterViewWithRegion(RegionNames.NavigationRegion, typeof(SearchDetailView));
+          //  region.RegisterViewWithRegion(RegionNames.RightNavigationRegion, typeof(TagView));
             this.Container.RegisterType<Object, TagView>(ViewNames.TagView);
         }
 

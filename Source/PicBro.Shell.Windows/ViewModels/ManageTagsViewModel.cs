@@ -25,7 +25,7 @@ namespace PicBro.Shell.Windows.ViewModels
         private int sortOption = 0;
         private bool isFiltered = false;
         private string sortColumn = "images";
-
+        
         private readonly IDataServiceProxy dataService;
         private readonly IEventAggregator eventAggregator;
         private readonly INavigationService navigationService;
@@ -81,6 +81,8 @@ namespace PicBro.Shell.Windows.ViewModels
             }
         }
 
+       
+
         private void OnSorting(object obj)
         {
             var e = obj as DataGridSortingEventArgs;
@@ -110,7 +112,7 @@ namespace PicBro.Shell.Windows.ViewModels
         }
 
         private void OnTagSearch()
-        {
+        {         
             if (this.SelectedTag != null)
             {
                 var messageBoxResult = MessageBox.Show("Do you want to view all images with the tag " + this.SelectedTag.Tag.Trim() + "?", "Show Images", MessageBoxButton.YesNo);
@@ -133,8 +135,9 @@ namespace PicBro.Shell.Windows.ViewModels
                         });
                     }
                     this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
-                }
+                }               
             }
+            
         }
 
 

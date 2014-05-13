@@ -76,16 +76,6 @@
                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-        </DataGrid>
-        <!--<ListView Name="tagList" Grid.Row="1" ItemsSource="{Binding Tags}" KeyUp="tagList_KeyUp">
-            <ListView.View>
-                <GridView>
-                    <GridView.Columns>
-                        <GridViewColumn Header="Tag" Width="300" DisplayMemberBinding="{Binding Tag}"/>
-                        <GridViewColumn Header="Images" Width="100" DisplayMemberBinding="{Binding Images}"/>
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView>-->
-    </Grid>
+        </DataGrid>     
+    </Grid>    
 </Controls:MetroWindow>

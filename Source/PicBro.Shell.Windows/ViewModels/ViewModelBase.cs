@@ -87,10 +87,10 @@
             this.eventAggregator.GetEvent<OEMCommandEvent>().Publish(obj);
         }
         public virtual void OnEscapeCommandExecuted()
-        {
-            this.navigationService.NavigateTo(RegionNames.MainContentRegion, ViewNames.ImageListView);
+        {           
             this.navigationService.NavigateTo(RegionNames.NavigationRegion, ViewNames.FolderListView);
             this.navigationService.NavigateTo(RegionNames.MenuBarRegion, ViewNames.MenuBarView);
+            this.navigationService.NavigateTo(RegionNames.MainContentRegion, ViewNames.ImageListView);           
         }
         public abstract bool IsNavigationTarget(NavigationContext navigationContext);
         public abstract void OnNavigatedFrom(NavigationContext navigationContext);
