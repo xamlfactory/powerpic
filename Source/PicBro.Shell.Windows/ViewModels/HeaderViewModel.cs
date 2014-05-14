@@ -195,7 +195,7 @@ namespace PicBro.Shell.Windows.ViewModels
         private void OnManageTages()
         {
             this.manageWindow = new ManageTagsWindow(this.dataService, this.threadService, this.eventAggregator, this.navigationService) { Owner = App.Current.MainWindow };
-            this.manageWindow.ShowDialog();
+            this.manageWindow.Show();
         }
 
         private void OnLauchTutorialCommandExecuted()
@@ -482,6 +482,7 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             if (this.manageWindow != null)
             {
+                this.manageWindow.Owner.Activate();
                 this.manageWindow.Close();
             }
         }

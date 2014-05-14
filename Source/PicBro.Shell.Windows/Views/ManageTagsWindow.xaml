@@ -78,4 +78,9 @@
             </i:Interaction.Triggers>
         </DataGrid>     
     </Grid>    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Deactivated">
+            <cmds:EventCommand Command="{Binding DeactivateCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 </Controls:MetroWindow>

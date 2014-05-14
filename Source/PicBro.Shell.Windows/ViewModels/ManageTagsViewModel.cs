@@ -25,7 +25,9 @@ namespace PicBro.Shell.Windows.ViewModels
         private int sortOption = 0;
         private bool isFiltered = false;
         private string sortColumn = "images";
-        
+        private bool isClosed = false;
+        private bool isDoubleClicked = false;
+
         private readonly IDataServiceProxy dataService;
         private readonly IEventAggregator eventAggregator;
         private readonly INavigationService navigationService;
@@ -81,7 +83,34 @@ namespace PicBro.Shell.Windows.ViewModels
             }
         }
 
-       
+        public DelegateCommand DeactivateCommand
+        {
+            get
+            {
+                return new DelegateCommand(this.OnDeactivate);
+            }
+        }
+
+        private void OnDeactivate()
+        {
+            if (!isClosed)
+            {
+                if (!isDoubleClicked)
+                {
+                    this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
+                }
+                else
+                {
+                    this.isDoubleClicked = false;
+                }
+            }
+            else
+            {
+                isClosed = false;
+            }
+        }
+
+
 
         private void OnSorting(object obj)
         {
@@ -108,13 +137,15 @@ namespace PicBro.Shell.Windows.ViewModels
         }
         private void OnCloseCommand()
         {
+            this.isClosed = true;
             this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
         }
 
         private void OnTagSearch()
-        {         
+        {
             if (this.SelectedTag != null)
             {
+                this.isDoubleClicked = true;
                 var messageBoxResult = MessageBox.Show("Do you want to view all images with the tag " + this.SelectedTag.Tag.Trim() + "?", "Show Images", MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
@@ -135,9 +166,9 @@ namespace PicBro.Shell.Windows.ViewModels
                         });
                     }
                     this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
-                }               
+                }
             }
-            
+
         }
 
 
