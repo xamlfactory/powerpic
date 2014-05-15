@@ -123,6 +123,8 @@
                 <TextBox Text="{Binding Image.Description,Mode=TwoWay}"
                          Margin="5,0,0,0"
                          Height="50"
+                         TextWrapping="Wrap"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                          Visibility="{Binding IsDescriptionEdit,Converter={StaticResource BoolToVisibilityConverter}}"
                          AcceptsReturn="True" />
                 <TextBlock Text="{Binding Image.Description,Mode=TwoWay, TargetNullValue='-NO DESCRIPTION-', FallbackValue='-NO DESCRIPTION-'}"

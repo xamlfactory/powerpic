@@ -30,7 +30,7 @@ namespace PicBro.Shell.Windows.Views
             : this()
         {
             this.DataContext = viewmodel;
-        }
+        }       
 
         private void OnEscapeDown(object sender, KeyEventArgs e)
         {

@@ -16,20 +16,31 @@ namespace PicBro.Shell.Windows.ViewModels
 {
     public sealed class ImageDetailViewModel : ViewModelBase
     {
-        private readonly IDataServiceProxy dataService;       
+        private readonly IDataServiceProxy dataService;
+        private DelegateCommand<object> removeTagCommand;
         private DelegateCommand<object> editDescriptionCommand;
-        private DelegateCommand<object> saveDescriptionCommand;       
+        private DelegateCommand<object> saveDescriptionCommand;
+        private DelegateCommand<object> clearTagsCommand;
         private DelegateCommand<object> dropCommand;
         private DelegateCommand favoriteCommand;
         private DelegateCommand clearDescriptionCommand;
-        private bool isDecriptionDisplay = true;        
+        private DelegateCommand<object> addTagCommand;
+        private string newTag;
+        private bool isDecriptionDisplay = true;
+        private bool isTagsAvailable;
         private ImageModel image;
         private bool isDecriptionEdit;
 
         private bool OnEscapeCanExecute(object args)
         {
             return true;
-        }       
+        }
+
+        public DelegateCommand<object> RemoveTagCommand
+        {
+            get { return removeTagCommand; }
+            private set { removeTagCommand = value; }
+        }
 
         public DelegateCommand<object> EditDescriptionCommand
         {
@@ -43,7 +54,12 @@ namespace PicBro.Shell.Windows.ViewModels
             private set { saveDescriptionCommand = value; }
         }
 
-       
+        public DelegateCommand<object> ClearTagsCommand
+        {
+            get { return clearTagsCommand; }
+            private set { clearTagsCommand = value; }
+        }
+
         public bool IsDescriptionEdit
         {
             get { return isDecriptionEdit; }
@@ -71,7 +87,11 @@ namespace PicBro.Shell.Windows.ViewModels
                 this.RaisePropertyChanged(() => this.IsDescriptionDisplay);
             }
         }
-        
+
+        public bool IsTagsAvailable
+        {
+            get { return this.Image != null && this.Image.Tags.Count > 0; }
+        }
         public ImageModel Image
         {
             get { return image; }
@@ -98,8 +118,26 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             get { return clearDescriptionCommand; }
             private set { clearDescriptionCommand = value; }
-        }    
-        
+        }
+
+        public string NewTag
+        {
+            get { return newTag; }
+            set
+            {
+                newTag = value;
+                this.RaisePropertyChanged(() => this.NewTag);
+                if (NewTag != null)
+                {
+                    AddTagCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+        public DelegateCommand<object> AddTagCommand
+        {
+            get { return addTagCommand; }
+            private set { addTagCommand = value; }
+        }
 
         public ImageDetailViewModel(
             IEventAggregator eventaggregator,
@@ -116,9 +154,12 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             this.DropCommand = new DelegateCommand<object>(this.OnDrop);
             this.FavoriteCommand = new DelegateCommand(this.OnFavoriteCommandExecuted);
+            this.AddTagCommand = new DelegateCommand<object>(this.OnAddTagExecute, this.OnAddTagCanExecute);
+            this.RemoveTagCommand = new DelegateCommand<object>(this.OnRemoveTagExecute);
             this.EditDescriptionCommand = new DelegateCommand<object>(this.OnEditDescriptionExecute);
             this.SaveDescriptionCommand = new DelegateCommand<object>(this.OnSaveDescriptionExecute);
-             this.ClearDescriptionCommand = new DelegateCommand(this.OnClearDescription);
+            this.ClearTagsCommand = new DelegateCommand<object>(this.OnClearTagsExecute, this.OnClearTagsCanExecute);
+            this.ClearDescriptionCommand = new DelegateCommand(this.OnClearDescription);
         }
 
         private void OnClearDescription()
@@ -145,8 +186,76 @@ namespace PicBro.Shell.Windows.ViewModels
             catch { }
 
             IsDescriptionEdit = false;
-        }    
-        
+        }
+
+        private void OnAddTagExecute(object args)
+        {
+            if (NewTag.Trim() != string.Empty)
+            {
+                this.Image.Tags.Add(NewTag);
+                this.RaisePropertyChanged(() => this.IsTagsAvailable);
+                try
+                {
+                    this.dataService.InsertTag(NewTag, this.Image.ID);
+                    NewTag = string.Empty;
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private bool OnAddTagCanExecute(object args)
+        {
+            if (NewTag != null && NewTag.Trim() != string.Empty)
+                return true;
+            else
+                return false;
+        }
+        private async void OnRemoveTagExecute(object args)
+        {
+            try
+            {
+                if (args != null && this.Image != null)
+                {
+                    this.Image.Tags.Remove(args.ToString());
+                    this.RaisePropertyChanged(() => this.IsTagsAvailable);
+                    await this.dataService.RemoveTagForImage(this.Image.ID, args.ToString());
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private async void OnClearTagsExecute(object args)
+        {
+            try
+            {
+                if (this.Image != null)
+                {
+                    var result = MessageBox.Show("Are you sure you want to delete all tags?", "Delete Tags", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        this.Image.Tags.Clear();
+                        this.RaisePropertyChanged(() => this.IsTagsAvailable);
+                        await this.dataService.RemoveAllTags(this.Image.ID);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private bool OnClearTagsCanExecute(object args)
+        {
+            return true;
+        }
+
         private void OnDrop(object args)
         {
             DragEventArgs e = args as DragEventArgs;
@@ -181,7 +290,8 @@ namespace PicBro.Shell.Windows.ViewModels
                 {
                     string tags = await this.dataService.GetTagsForImage(this.Image.ID);
                     string[] tagsSplited = tags.Split(',');
-                    this.Image.Tags = tagsSplited.ToObservableCollection<string>();                    
+                    this.Image.Tags = tagsSplited.ToObservableCollection<string>();
+                    this.RaisePropertyChanged(() => this.IsTagsAvailable);
                 }
             }
             catch (Exception)
