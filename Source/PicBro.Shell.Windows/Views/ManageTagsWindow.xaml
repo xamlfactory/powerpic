@@ -12,9 +12,6 @@
                       BorderBrush="{DynamicResource AccentColorBrush}"
                       BorderThickness="1"
                       ResizeMode="NoResize">
-    <Controls:MetroWindow.InputBindings>
-        <KeyBinding Key="Escape" Command="{Binding CloseCommand}"/>
-    </Controls:MetroWindow.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -78,9 +75,4 @@
             </i:Interaction.Triggers>
         </DataGrid>     
     </Grid>    
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Deactivated">
-            <cmds:EventCommand Command="{Binding DeactivateCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 </Controls:MetroWindow>

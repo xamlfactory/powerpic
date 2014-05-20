@@ -25,7 +25,6 @@ namespace PicBro.Shell.Windows.ViewModels
         private int sortOption = 0;
         private bool isFiltered = false;
         private string sortColumn = "images";
-        private bool isClosed = false;
         private bool isDoubleClicked = false;
 
         private readonly IDataServiceProxy dataService;
@@ -67,14 +66,6 @@ namespace PicBro.Shell.Windows.ViewModels
         }
 
 
-        public DelegateCommand CloseCommand
-        {
-            get
-            {
-                return new DelegateCommand(this.OnCloseCommand);
-            }
-        }
-
         public DelegateCommand<object> SortCommand
         {
             get
@@ -82,35 +73,6 @@ namespace PicBro.Shell.Windows.ViewModels
                 return new DelegateCommand<Object>(this.OnSorting);
             }
         }
-
-        public DelegateCommand DeactivateCommand
-        {
-            get
-            {
-                return new DelegateCommand(this.OnDeactivate);
-            }
-        }
-
-        private void OnDeactivate()
-        {
-            if (!isClosed)
-            {
-                if (!isDoubleClicked)
-                {
-                    this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
-                }
-                else
-                {
-                    this.isDoubleClicked = false;
-                }
-            }
-            else
-            {
-                isClosed = false;
-            }
-        }
-
-
 
         private void OnSorting(object obj)
         {
@@ -134,11 +96,6 @@ namespace PicBro.Shell.Windows.ViewModels
                     this.Tags.Add(item);
                 }
             }
-        }
-        private void OnCloseCommand()
-        {
-            this.isClosed = true;
-            this.eventAggregator.GetEvent<CloseWindowEvent>().Publish(null);
         }
 
         private void OnTagSearch()
