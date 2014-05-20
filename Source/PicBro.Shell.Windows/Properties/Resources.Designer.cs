@@ -250,6 +250,15 @@ namespace PicBro.Shell.Windows.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to IMAGES.
+        /// </summary>
+        internal static string Label_Images {
+            get {
+                return ResourceManager.GetString("Label_Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Images Count.
         /// </summary>
         internal static string Label_ImagesCount {
@@ -291,6 +300,15 @@ namespace PicBro.Shell.Windows.Properties {
         internal static string Label_Please {
             get {
                 return ResourceManager.GetString("Label_Please", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected tag?.
+        /// </summary>
+        internal static string Label_Prompt {
+            get {
+                return ResourceManager.GetString("Label_Prompt", resourceCulture);
             }
         }
         
@@ -349,6 +367,15 @@ namespace PicBro.Shell.Windows.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to view all images with the selected tag?.
+        /// </summary>
+        internal static string Label_SelectTagPrompt {
+            get {
+                return ResourceManager.GetString("Label_SelectTagPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Theme.
         /// </summary>
         internal static string Label_SelectTheme {
@@ -363,6 +390,15 @@ namespace PicBro.Shell.Windows.Properties {
         internal static string Label_Splash {
             get {
                 return ResourceManager.GetString("Label_Splash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TAG.
+        /// </summary>
+        internal static string Label_Tag {
+            get {
+                return ResourceManager.GetString("Label_Tag", resourceCulture);
             }
         }
         
@@ -498,6 +534,24 @@ namespace PicBro.Shell.Windows.Properties {
         internal static string Menu_Type {
             get {
                 return ResourceManager.GetString("Menu_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Images.
+        /// </summary>
+        internal static string Titl_ShowImages {
+            get {
+                return ResourceManager.GetString("Titl_ShowImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Tag?.
+        /// </summary>
+        internal static string Title_Delete {
+            get {
+                return ResourceManager.GetString("Title_Delete", resourceCulture);
             }
         }
     }

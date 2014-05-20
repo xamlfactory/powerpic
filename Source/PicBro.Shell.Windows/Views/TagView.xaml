@@ -63,7 +63,8 @@
                      Margin="5,10,0,10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid x:Name="TagGrid">
+                        <Grid x:Name="TagGrid"
+                              ToolTip="{Binding}">
                             <Border x:Name="TagBorder"
                                     Background="LightGray"
                                     Opacity="0">
@@ -82,8 +83,9 @@
                                        IsHitTestVisible="False"
                                        VerticalAlignment="Center"
                                        x:Name="TagText"
+                                       Width="130"
+                                       TextTrimming="CharacterEllipsis"
                                        TextWrapping="NoWrap"
-                                       ToolTip="{Binding}"
                                        HorizontalAlignment="Left" />
                         </Grid>
                         <DataTemplate.Triggers>

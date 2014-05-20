@@ -4,7 +4,7 @@
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                       xmlns:cmds="clr-namespace:PicBro.Shell.Windows.Common"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      Title="Manage Tags"
+                      Title="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_ManageTags}"
                       Height="300"
                       SizeToContent="Width"
                       WindowStartupLocation="CenterOwner"                       
@@ -47,7 +47,7 @@
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Width="250" 
                                          SortMemberPath="Tag"
-                                         Header="Tag">
+                                         Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_Tag}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Tag}" />
@@ -56,7 +56,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn  Width="138"
                                          SortMemberPath="Images"
-                                         Header="Images">
+                                         Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_Images}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Images}" />

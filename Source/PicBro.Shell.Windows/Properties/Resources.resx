@@ -264,4 +264,22 @@
   <data name="Menu_ManageTags" xml:space="preserve">
     <value>Manage Tags</value>
   </data>
+  <data name="Label_Images" xml:space="preserve">
+    <value>IMAGES</value>
+  </data>
+  <data name="Label_Prompt" xml:space="preserve">
+    <value>Are you sure you want to delete the selected tag?</value>
+  </data>
+  <data name="Label_SelectTagPrompt" xml:space="preserve">
+    <value>Do you want to view all images with the selected tag?</value>
+  </data>
+  <data name="Label_Tag" xml:space="preserve">
+    <value>TAG</value>
+  </data>
+  <data name="Title_Delete" xml:space="preserve">
+    <value>Delete Tag?</value>
+  </data>
+  <data name="Titl_ShowImages" xml:space="preserve">
+    <value>Show Images</value>
+  </data>
 </root>

@@ -130,10 +130,10 @@
     <value>ZURÜCK</value>
   </data>
   <data name="Button_CleanDB" xml:space="preserve">
-    <value>CLEANUP DATABASE</value>
+    <value>DATENBANK BEREINIGEN</value>
   </data>
   <data name="Button_ClearAllTags" xml:space="preserve">
-    <value>Löschen Alle Schlagworte</value>
+    <value>Alle Tags löschen</value>
   </data>
   <data name="Button_Email" xml:space="preserve">
     <value>E-MAIL</value>
@@ -142,10 +142,10 @@
     <value>EXPORT</value>
   </data>
   <data name="Button_ResetSettings" xml:space="preserve">
-    <value>Einstellungen zurücksetzen</value>
+    <value>Reset</value>
   </data>
   <data name="Button_Save" xml:space="preserve">
-    <value>sparen</value>
+    <value>Speichern</value>
   </data>
   <data name="Button_Settings" xml:space="preserve">
     <value>Einstellungen</value>
@@ -154,19 +154,19 @@
     <value>DIASHOW</value>
   </data>
   <data name="DropImages" xml:space="preserve">
-    <value>Sie Bilder hier</value>
+    <value>Export-Bereich</value>
   </data>
   <data name="Label_AdvancedSettings" xml:space="preserve">
     <value>Erweiterte Einstellungen</value>
   </data>
   <data name="Label_AlignTagPane" xml:space="preserve">
-    <value>Tag align Pane</value>
+    <value>Tag-Leiste</value>
   </data>
   <data name="Label_Background" xml:space="preserve">
     <value>Hintergrund</value>
   </data>
   <data name="Label_ClearAllData" xml:space="preserve">
-    <value>CLEAR ALL DATA</value>
+    <value>DATENBANK LÖSCHEN</value>
   </data>
   <data name="Label_DBPath" xml:space="preserve">
     <value>Datenbankpfad</value>
@@ -175,7 +175,7 @@
     <value>Dateieinstellungen</value>
   </data>
   <data name="Label_ImagesCount" xml:space="preserve">
-    <value>Bilder Graf</value>
+    <value>Anzahl Bilder</value>
   </data>
   <data name="Label_ImageTypes" xml:space="preserve">
     <value>Bildtypen</value>
@@ -190,10 +190,10 @@
     <value>Bitte lassen Sie uns wissen:</value>
   </data>
   <data name="Label_ScanMessage" xml:space="preserve">
-    <value>Rescan die Verzeichnisse in der lokalen Datenbank und entfernen Sie alle verwaisten Daumen:</value>
+    <value>Rescan der Verzeichnisse in der lokalen Datenbank und Entfernung aller verwaisten Thumbnails:</value>
   </data>
   <data name="Label_SearchFavoritesOnly" xml:space="preserve">
-    <value>Suche Nur Favoriten</value>
+    <value>Nur Favoriten</value>
   </data>
   <data name="Label_SearchInDescription" xml:space="preserve">
     <value>Suche in Beschreibung</value>
@@ -208,22 +208,22 @@
     <value>{} {0} Ergebnisse gefunden</value>
   </data>
   <data name="Label_SelectTheme" xml:space="preserve">
-    <value>Wählen Theme</value>
+    <value>Design</value>
   </data>
   <data name="Label_Splash" xml:space="preserve">
-    <value>Vielen Dank, dass Sie sich für unser Produkt. Wir hoffen, dass Sie diese Software so nützlich, wie wir finden. Gibt es irgendwelche Funktionen fehlen? Gibt es etwas, was Sie gerne sehen?</value>
+    <value>Vielen Dank für die Verwendung unseres Produkts. Wir hoffen, dass die Software Ihnen stets gute Dienste leistet. Gibt es irgendwelche Funktionen, die fehlen? Haben Sie Verbesserungsvorschläge?</value>
   </data>
   <data name="Label_TotalSize" xml:space="preserve">
     <value>Gesamtgröße</value>
   </data>
   <data name="Label_UserInterface" xml:space="preserve">
-    <value>User Interface</value>
+    <value>Allgemeine Einstellung</value>
   </data>
   <data name="Menu_About" xml:space="preserve">
     <value>über</value>
   </data>
   <data name="Menu_AddDirectory" xml:space="preserve">
-    <value>_ADD Verzeichnis</value>
+    <value>_Verzeichnis hinzufügen</value>
   </data>
   <data name="Menu_DateModified" xml:space="preserve">
     <value>Änderungsdatum</value>
@@ -232,7 +232,7 @@
     <value>Beenden</value>
   </data>
   <data name="Menu_File" xml:space="preserve">
-    <value>_FILE</value>
+    <value>_DATEI</value>
   </data>
   <data name="Menu_Help" xml:space="preserve">
     <value>HILFE</value>
@@ -250,18 +250,36 @@
     <value>Größe</value>
   </data>
   <data name="Menu_Tutorial" xml:space="preserve">
-    <value>Lernprogramm</value>
+    <value>Erste Schritte und Hilfe</value>
   </data>
   <data name="Menu_Type" xml:space="preserve">
     <value>Typ</value>
   </data>
   <data name="Button_AddFlimStrip" xml:space="preserve">
-    <value>Um Flim Streifen hinzufügen</value>
+    <value>Hinzufügen</value>
   </data>
   <data name="Button_AddTags" xml:space="preserve">
-    <value>Addieren Tags</value>
+    <value>Tags hinzufügen</value>
   </data>
   <data name="Menu_ManageTags" xml:space="preserve">
-    <value>Verwalten Tags</value>
+    <value>Tags verwalten</value>
+  </data>
+  <data name="Label_Images" xml:space="preserve">
+    <value>ANZAHL</value>
+  </data>
+  <data name="Label_Prompt" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie das ausgewählte Tag löschen möchten?</value>
+  </data>
+  <data name="Label_SelectTagPrompt" xml:space="preserve">
+    <value>Sollen alle Inhalte mit diesem Tag angezeigt werden?</value>
+  </data>
+  <data name="Label_Tag" xml:space="preserve">
+    <value>TAG</value>
+  </data>
+  <data name="Title_Delete" xml:space="preserve">
+    <value>Tag löschen?</value>
+  </data>
+  <data name="Titl_ShowImages" xml:space="preserve">
+    <value>Bilder anzeigen</value>
   </data>
 </root>
