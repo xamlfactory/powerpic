@@ -36,6 +36,15 @@ namespace PicBro.Shell.Windows.Views
             this.Loaded += ManageTagsWindow_Loaded;
         }
 
+        protected override void OnPreviewKeyUp(KeyEventArgs e)
+        {
+            base.OnPreviewKeyUp(e);
+            if(e.Key == Key.Escape)
+            {
+                this.Close();
+            }
+        }
+
         void ManageTagsWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var scroll = GetScrollbar(tags_grid);
