@@ -16,6 +16,7 @@ using PicBro.Shell.Windows.Common;
 using PicBro.Shell.Windows.Events;
 using System.Windows.Controls;
 using System.ComponentModel;
+using PicBro.Shell.Windows.Properties;
 
 namespace PicBro.Shell.Windows.ViewModels
 {
@@ -102,7 +103,7 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             if (this.SelectedTag != null)
             {
-                isDoubleClicked = true;
+                this.isDoubleClicked = true;
                 var messageBoxResult = MessageBox.Show("Do you want to view all images with the tag " + this.SelectedTag.Tag.Trim() + "?", "Show Images", MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
@@ -166,7 +167,9 @@ namespace PicBro.Shell.Windows.ViewModels
 
         private async void OnDelete()
         {
-            var result = MessageBox.Show("Are you sure to delete the Selected Tag?", "Delete Tag", MessageBoxButton.YesNo);
+            string prompt = Resources.Label_Prompt;
+            string title = Resources.Title_Delete;
+            var result = MessageBox.Show(prompt, title, MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 bool isSuccess = await this.dataService.RemoveTag(this.SelectedTag.Tag);
