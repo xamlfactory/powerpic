@@ -44,6 +44,31 @@ namespace PicBro.Shell.Windows.Views
                 this.Close();
             }
         }
+      
+
+        protected override void OnDeactivated(EventArgs e)
+        {        
+            if ((DataContext as ManageTagsViewModel).isDoubleClicked)
+            {
+                (DataContext as ManageTagsViewModel).isDoubleClicked = false;
+            }
+            else
+            {
+                if (this.IsVisible)
+                {
+                    this.Close();
+                }
+            }
+           
+            base.OnDeactivated(e);
+        }
+
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            this.Owner.Activate();
+        }
 
         void ManageTagsWindow_Loaded(object sender, RoutedEventArgs e)
         {

@@ -480,10 +480,13 @@ namespace PicBro.Shell.Windows.ViewModels
 
         private void OnCloseWindow(object obj)
         {
-            if (this.manageWindow != null && this.manageWindow.IsVisible)
+            if (this.manageWindow != null)
             {
                 this.manageWindow.Owner.Activate();
-                this.manageWindow.Close();               
+                if (this.manageWindow.IsVisible)
+                {
+                    this.manageWindow.Close();
+                }
             }
         }
     }

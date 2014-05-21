@@ -25,7 +25,7 @@ namespace PicBro.Shell.Windows.ViewModels
         private int sortOption = 0;
         private bool isFiltered = false;
         private string sortColumn = "images";
-        private bool isDoubleClicked = false;
+        internal bool isDoubleClicked = false;
 
         private readonly IDataServiceProxy dataService;
         private readonly IEventAggregator eventAggregator;
@@ -102,7 +102,7 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             if (this.SelectedTag != null)
             {
-                this.isDoubleClicked = true;
+                isDoubleClicked = true;
                 var messageBoxResult = MessageBox.Show("Do you want to view all images with the tag " + this.SelectedTag.Tag.Trim() + "?", "Show Images", MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {

@@ -197,7 +197,7 @@ namespace PicBro.Shell.Windows.ViewModels
 
         private void OnAddTagsCommand(object obj)
         {
-            new PicBro.Shell.Windows.Views.AddTagsWindow(this.eventAggregator, this.dataService, obj) { Owner = App.Current.MainWindow }.ShowDialog();
+            new PicBro.Shell.Windows.Views.AddTagsWindow(this.eventAggregator, this.dataService, obj ?? this.SelectedImage) { Owner = App.Current.MainWindow }.ShowDialog();
         }
 
         private void HandleKeyPress(object obj)

@@ -106,7 +106,7 @@
                 <KeyBinding Key="A"
                             Modifiers="Shift"
                             Command="{Binding AddTagsCommand}"
-                            />
+                            CommandParameter="{Binding Path=SelectedItems,ElementName=list}" />
             </ListBox.InputBindings>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem"
