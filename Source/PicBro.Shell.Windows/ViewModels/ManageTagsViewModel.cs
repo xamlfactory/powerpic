@@ -104,7 +104,9 @@ namespace PicBro.Shell.Windows.ViewModels
             if (this.SelectedTag != null)
             {
                 this.isDoubleClicked = true;
-                var messageBoxResult = MessageBox.Show("Do you want to view all images with the tag " + this.SelectedTag.Tag.Trim() + "?", "Show Images", MessageBoxButton.YesNo);
+                string prompt = Resources.Label_SelectTagPrompt;
+                string title = Resources.Titl_ShowImages;
+                var messageBoxResult = MessageBox.Show(prompt, title, MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     if (!string.IsNullOrEmpty(this.SelectedTag.Tag.Trim()))
