@@ -48,10 +48,10 @@ namespace PicBro.Shell.Windows.Views
       
 
         protected override void OnDeactivated(EventArgs e)
-        {        
-            if ((DataContext as ManageTagsViewModel).isDoubleClicked)
+        {
+            if ((DataContext as ManageTagsViewModel).isDialogOpend)
             {
-                (DataContext as ManageTagsViewModel).isDoubleClicked = false;
+                (DataContext as ManageTagsViewModel).isDialogOpend = false;
             }
             else
             {

@@ -26,7 +26,7 @@ namespace PicBro.Shell.Windows.ViewModels
         private int sortOption = 0;
         private bool isFiltered = false;
         private string sortColumn = "images";
-        internal bool isDoubleClicked = false;
+        internal bool isDialogOpend = false;
 
         private readonly IDataServiceProxy dataService;
         private readonly IEventAggregator eventAggregator;
@@ -103,7 +103,7 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             if (this.SelectedTag != null)
             {
-                this.isDoubleClicked = true;
+                this.isDialogOpend = true;
                 string prompt = Resources.Label_SelectTagPrompt;
                 string title = Resources.Titl_ShowImages;
                 var messageBoxResult = MessageBox.Show(prompt, title, MessageBoxButton.YesNo);
@@ -171,6 +171,7 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             string prompt = Resources.Label_Prompt;
             string title = Resources.Title_Delete;
+            this.isDialogOpend = true;
             var result = MessageBox.Show(prompt, title, MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
