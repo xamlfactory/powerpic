@@ -28,6 +28,7 @@ namespace PicBro.Shell.Windows.Views
     public partial class ManageTagsWindow : MetroWindow
     {
         IThreadService threadService;
+        bool isClosed = false;
 
         public ManageTagsWindow(IDataServiceProxy dataService, IThreadService threadservice, IEventAggregator eventAggregator,INavigationService navigationService)
         {
@@ -54,7 +55,7 @@ namespace PicBro.Shell.Windows.Views
             }
             else
             {
-                if (this.IsVisible)
+                if (this.IsVisible && ! this.isClosed)
                 {
                     this.Close();
                 }
@@ -67,12 +68,14 @@ namespace PicBro.Shell.Windows.Views
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             base.OnClosing(e);
+            this.isClosed = true;
             this.Owner.Activate();
         }
 
         void ManageTagsWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var scroll = GetScrollbar(tags_grid);
+            this.isClosed = false;
             scroll.ScrollChanged += scroll_ScrollChanged;            
             ((ManageTagsViewModel)this.DataContext).OnNavigatedTo(null);
         }
