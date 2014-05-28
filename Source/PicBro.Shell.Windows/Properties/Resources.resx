@@ -282,4 +282,13 @@
   <data name="Titl_ShowImages" xml:space="preserve">
     <value>Show Images</value>
   </data>
+  <data name="Menu_ClearFlimStrip" xml:space="preserve">
+    <value>Clear FlimStrip</value>
+  </data>
+  <data name="Menu_ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Message_ClearAll" xml:space="preserve">
+    <value>Are you sure you want to clear the entire film strip?</value>
+  </data>
 </root>

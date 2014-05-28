@@ -51,7 +51,10 @@
             <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_File}">
                 <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_AddDirectory}"
                           Command="{Binding AddFolderCommand}" />
+                
+                <Separator />
                 <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_ManageTags}" Command="{Binding ManageTagsCommand}"/>
+                <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_ClearFlimStrip}" Command="{Binding ClearFlimStripCommand}"/>
 
                 <Separator />
                 <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_Exit}"

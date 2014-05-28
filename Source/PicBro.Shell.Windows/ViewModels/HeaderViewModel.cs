@@ -114,6 +114,16 @@ namespace PicBro.Shell.Windows.ViewModels
             set { manageTagsCommand = value; }
         }
 
+        private DelegateCommand clearFlimStripCommand;
+
+        public DelegateCommand ClearFlimStripCommand
+        {
+            get { return clearFlimStripCommand; }
+            set { clearFlimStripCommand = value; }
+        }
+
+
+
 
         public double Progress
         {
@@ -190,6 +200,12 @@ namespace PicBro.Shell.Windows.ViewModels
             this.SortCommand = new DelegateCommand<object>(this.OnSortCommandExecuted);
             this.LaunchTutorialCommand = new DelegateCommand(this.OnLauchTutorialCommandExecuted);
             this.ManageTagsCommand = new DelegateCommand(this.OnManageTages);
+            this.ClearFlimStripCommand = new DelegateCommand(this.OnClearFlimStrip);
+        }
+
+        private void OnClearFlimStrip()
+        {
+            this.eventAggregator.GetEvent<ClearFilmStripEvent>().Publish(null);
         }
 
         private void OnManageTages()

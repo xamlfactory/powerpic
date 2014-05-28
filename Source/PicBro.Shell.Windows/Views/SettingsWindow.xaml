@@ -184,7 +184,7 @@
                        Width="16" />
                 <TextBlock Text="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Label_ClearAllData}"
                            TextAlignment="Center"
-                           Width="130" />
+                           Width="160" />
             </StackPanel>
         </Button>
         <!--11th row-->

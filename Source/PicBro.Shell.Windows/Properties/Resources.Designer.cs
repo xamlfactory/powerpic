@@ -439,6 +439,24 @@ namespace PicBro.Shell.Windows.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear All.
+        /// </summary>
+        internal static string Menu_ClearAll {
+            get {
+                return ResourceManager.GetString("Menu_ClearAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear FlimStrip.
+        /// </summary>
+        internal static string Menu_ClearFlimStrip {
+            get {
+                return ResourceManager.GetString("Menu_ClearFlimStrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Modified.
         /// </summary>
         internal static string Menu_DateModified {
@@ -534,6 +552,15 @@ namespace PicBro.Shell.Windows.Properties {
         internal static string Menu_Type {
             get {
                 return ResourceManager.GetString("Menu_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to clear the entire film strip?.
+        /// </summary>
+        internal static string Message_ClearAll {
+            get {
+                return ResourceManager.GetString("Message_ClearAll", resourceCulture);
             }
         }
         

@@ -18,6 +18,7 @@ namespace PicBro.Shell.Windows.ViewModels
     using PicBro.Shell.Windows.Views;
     using PicBro.Shell.Windows.Views.Export;
     using System.Windows.Controls;
+    using PicBro.Shell.Windows.Properties;
 
     public sealed class FooterViewModel : ViewModelBase
     {
@@ -87,6 +88,15 @@ namespace PicBro.Shell.Windows.ViewModels
                 this.RaisePropertyChanged(() => this.Images);
             }
         }
+
+        private DelegateCommand clearAllCommand;
+
+        public DelegateCommand ClearAllCommand
+        {
+            get { return clearAllCommand; }
+            set { clearAllCommand = value; }
+        }
+
 
         public ImageModel SelectedImage
         {
@@ -181,6 +191,12 @@ namespace PicBro.Shell.Windows.ViewModels
             this.ExportCommand = new DelegateCommand<object>(this.OnExportExecute, this.OnExportCanExecute);
             this.SlideShowCommand = new DelegateCommand<object>(this.OnSlideShowCommandExecute, this.OnSlideShowCommandCanExecute);
             this.DeleteCommand = new DelegateCommand<object>(this.OnDeleteExecute);
+            this.ClearAllCommand = new DelegateCommand(this.OnClearAll);
+        }
+
+        private void OnClearAll()
+        {
+            this.eventAggregator.GetEvent<ClearFilmStripEvent>().Publish(null);
         }
 
         private void OnOpenCommand(object item)
@@ -301,12 +317,33 @@ namespace PicBro.Shell.Windows.ViewModels
         {
             this.eventAggregator.GetEvent<ScanProgressChanged>().Subscribe(this.OnScanProgressChanged);
             this.eventAggregator.GetEvent<AddImgesToFlimStripEvent>().Subscribe(this.AddImagesToFlimStrip);
+            this.eventAggregator.GetEvent<ClearFilmStripEvent>().Subscribe(this.ClearFlimStrip);
+
+        }
+
+        private void ClearFlimStrip(object obj)
+        {
+            if (this.Images.Count > 1)
+            {
+                string prompt = Resources.Message_ClearAll;
+                string title = Resources.Menu_ClearAll;
+                var messageBoxResult = MessageBox.Show(prompt, title, MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    this.Images.Clear();
+                }
+            }
+            else
+            {
+                this.Images.Clear();
+            }
         }
 
         private void UnSubscribeEvents()
         {
             this.eventAggregator.GetEvent<ScanProgressChanged>().Unsubscribe(this.OnScanProgressChanged);
             this.eventAggregator.GetEvent<AddImgesToFlimStripEvent>().Unsubscribe(this.AddImagesToFlimStrip);
+            this.eventAggregator.GetEvent<ClearFilmStripEvent>().Unsubscribe(this.ClearFlimStrip);
         }
 
         void Images_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

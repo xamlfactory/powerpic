@@ -109,7 +109,12 @@
                                                   Command="{Binding Path=PlacementTarget.Tag.DeleteCommand, 
                                             RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                   CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
-                                    </ContextMenu>
+                                            <MenuItem Header="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Menu_ClearAll}"
+                                                  Command="{Binding Path=PlacementTarget.Tag.ClearAllCommand, 
+                                            RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+
+                                        </ContextMenu>
                                 </Grid.ContextMenu>
                                 <Grid>
                                     <Grid.Effect>

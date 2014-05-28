@@ -282,4 +282,13 @@
   <data name="Titl_ShowImages" xml:space="preserve">
     <value>Bilder anzeigen</value>
   </data>
+  <data name="Menu_ClearFlimStrip" xml:space="preserve">
+    <value>Export-Bereich bereinigen</value>
+  </data>
+  <data name="Menu_ClearAll" xml:space="preserve">
+    <value>Alle entfernen</value>
+  </data>
+  <data name="Message_ClearAll" xml:space="preserve">
+    <value>Sollen wirklich alle Inhalte aus dem Export-Bereich entfernt werden?</value>
+  </data>
 </root>

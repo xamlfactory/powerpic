@@ -122,6 +122,7 @@
     <Compile Include="Converter\SortBySelectonConverter.cs" />
     <Compile Include="Events\AddImagesToFlimStripEventArgs.cs" />
     <Compile Include="Events\AddImgesToFlimStripEvent.cs" />
+    <Compile Include="Events\ClearFilmStripEvent.cs" />
     <Compile Include="Events\CloseWindowEvent.cs" />
     <Compile Include="Events\FocusSearchEvent.cs" />
     <Compile Include="Events\FolderAddedEvent.cs" />
