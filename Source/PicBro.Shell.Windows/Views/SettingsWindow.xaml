@@ -188,19 +188,28 @@
             </StackPanel>
         </Button>
         <!--11th row-->
-        <Button Grid.Row="12"
-                Margin="10,20,10,10"
-                Grid.ColumnSpan="2"
+        <Grid Grid.ColumnSpan="2" Grid.Row="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="12"
+                Margin="0,20,10,10"
+                Grid.Column="3"
                 Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_Save}"
                 Padding="15 2"
                 Click="OnSave"
                 HorizontalAlignment="Right" />
-        <Button Grid.Row="12"
-                Margin="10 20 80 10"
-                Grid.ColumnSpan="2"
+            <Button 
+                Margin="10 20 0 10"
+                Grid.Column="1"
                 Content="{Resx ResxName=PicBro.Shell.Windows.Properties.Resources, Key=Button_ResetSettings}"
                 Padding="15 2"
                 Click="OnResetSettings"
                 HorizontalAlignment="Right" />
+        </Grid>
+       
     </Grid>
 </Controls:MetroWindow>
